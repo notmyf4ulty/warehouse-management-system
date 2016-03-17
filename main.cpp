@@ -3,15 +3,17 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QDebug>
+#include <iostream>
 
+using namespace std;
 
 int main(int argc, char *argv[])
 {
-//    QApplication a(argc, argv);
-//    MainWindow w;
-//    w.show();
+    //    QApplication a(argc, argv);
+    //    MainWindow w;
+    //    w.show();
 
-//    return a.exec();
+    //    return a.exec();
     QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
     db.setHostName("localhost");
     db.setDatabaseName("sakila");
@@ -19,13 +21,27 @@ int main(int argc, char *argv[])
     db.setPassword("password");
     bool ok = db.open();
 
-    QSqlQuery query;
-    //actor_id, first_name, second_name
-    query.exec("SELECT * FROM actor;");
+    string tellMe;
+    QString QtellMe;
 
-    while (query.next()) {
-        QString f_name = query.value(0).toString();
-        QString s_name = query.value(1).toString();
-        qDebug() << f_name + " " + s_name;
+    QSqlQuery query;
+
+    cout << "Tell me something\n";
+
+    do {
+
+        cin >> tellMe;
+        cout << tellMe << endl;
+        //        QtellMe = QString::fromStdString(tellMe);
+
+        //        query.exec(QtellMe);
+
+        //        while (query.next()) {
+        //            QString f_name = query.value(0).toString();
+        //            QString s_name = query.value(1).toString();
+        //            qDebug() << f_name + " " + s_name;
+        //        }
     }
+    while (tellMe != "exit");
+
 }
