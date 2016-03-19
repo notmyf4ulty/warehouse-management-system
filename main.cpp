@@ -1,47 +1,46 @@
-#include "mainwindow.h"
+// General
+#include <iostream>
 #include <QApplication>
+#include <QDebug>
+
+// Databases
 #include <QSqlDatabase>
 #include <QSqlQuery>
-#include <QDebug>
-#include <iostream>
+#include "dbconnector.h"
+#include <QSqlQueryModel>
+
+// GUI
+#include "mainwindow.h"
+#include <QTableView>
 
 using namespace std;
 
 int main(int argc, char *argv[])
 {
-    //    QApplication a(argc, argv);
-    //    MainWindow w;
-    //    w.show();
+    QApplication app(argc, argv);
 
-    //    return a.exec();
-    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName("localhost");
-    db.setDatabaseName("sakila");
-    db.setUserName("tutorial");
-    db.setPassword("password");
-    bool ok = db.open();
+    dbConnector db;
+    db.runDatabase();
 
-    string tellMe;
-    QString QtellMe;
+//    QSqlQueryModel *model = new QSqlQueryModel;
+//    model->setQuery("SELECT first_name, last_name FROM actor;");
+//    model->setHeaderData(0, Qt::Horizontal, "Name");
+//    model->setHeaderData(1, Qt::Horizontal, "Salary");
 
-    QSqlQuery query;
+//    QTableView *view = new QTableView;
+//    view->setModel(model);
+//    view->show();
 
-    cout << "Tell me something\n";
+//    string cmd;
 
-    do {
+//    do {
+//        qDebug() << "Type a query: ";
+//        getline(cin, cmd);
+//        db.runQueryInConsole(QString::fromStdString(cmd));
+//    }
+//    while (cmd != "exit");
 
-        cin >> tellMe;
-        cout << tellMe << endl;
-        //        QtellMe = QString::fromStdString(tellMe);
-
-        //        query.exec(QtellMe);
-
-        //        while (query.next()) {
-        //            QString f_name = query.value(0).toString();
-        //            QString s_name = query.value(1).toString();
-        //            qDebug() << f_name + " " + s_name;
-        //        }
-    }
-    while (tellMe != "exit");
-
+    MainWindow mainWindow;
+    mainWindow.show();
+    return app.exec();
 }
