@@ -37,27 +37,3 @@ void dbConnector::runQueryInConsole(QString queryCommand)
         qDebug() << endl;
     }
 }
-
-//    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-//    db.setHostName("localhost");
-//    db.setDatabaseName("sakila");
-//    db.setUserName("tutorial");
-//    db.setPassword("password");
-//    bool ok = db.open();
-
-//    string tellMe;
-//    QString QtellMe;
-//    cout << "Tell me something\n";
-//    getline(cin,tellMe);
-//    cout << tellMe << endl;
-//    QtellMe = QString::fromStdString(tellMe);
-
-//    QSqlQuery query;
-//    query.exec(QtellMe);
-
-//    while (query.next()) {
-//        QString f_name = query.value(0).toString();
-//        QString s_name = query.value(1).toString();
-//        qDebug() << f_name + " " + s_name;
-
-//    }

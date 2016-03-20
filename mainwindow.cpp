@@ -13,8 +13,12 @@ MainWindow::MainWindow(QWidget *parent)
     // Connect button signal to appropriate slot
     connect(m_button, SIGNAL (released()), this, SLOT (handleButton()));
 
+    textInput = new QLineEdit(this);
+    connect(textInput, SIGNAL (returnPressed()), this, SLOT (handleTextInput()));
+
+
     model = new QSqlQueryModel(this);
-    model->setQuery("SELECT first_name, last_name FROM actor;");
+    model->setQuery("SELECT * FROM actor;");//first_name, last_name FROM actor;");
     model->setHeaderData(0, Qt::Horizontal, "Name");
     model->setHeaderData(1, Qt::Horizontal, "Salary");
 
@@ -26,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
     QGridLayout *layout = new QGridLayout( centralWidget );
 
     layout->addWidget(m_button);
+    layout->addWidget(textInput);
     layout->addWidget(view);
     //    setCentralWidget(view);
 }
@@ -36,4 +41,9 @@ void MainWindow::handleButton()
     m_button->setText("Example");
     // resize button
     m_button->resize(100,100);
+}
+
+void MainWindow::handleTextInput()
+{
+    model->setQuery(textInput->text());
 }

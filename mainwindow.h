@@ -7,6 +7,7 @@
 #include <QSqlQueryModel>
 #include <QGridLayout>
 #include <QWidget>
+#include <QLineEdit>
 
 namespace Ui {
     class MainWindow;
@@ -19,10 +20,12 @@ public:
     explicit MainWindow(QWidget *parent = 0);
 private slots:
     void handleButton();
+    void handleTextInput();
 private:
     QPushButton *m_button;
     QTableView *view;
     QSqlQueryModel *model;
+    QLineEdit *textInput;
 };
 
 #endif // MAINWINDOW_H
