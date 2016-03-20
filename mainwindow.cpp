@@ -16,7 +16,6 @@ MainWindow::MainWindow(QWidget *parent)
     textInput = new QLineEdit(this);
     connect(textInput, SIGNAL (returnPressed()), this, SLOT (handleTextInput()));
 
-
     model = new QSqlQueryModel(this);
     model->setQuery("SELECT * FROM actor;");//first_name, last_name FROM actor;");
     model->setHeaderData(0, Qt::Horizontal, "Name");
@@ -28,11 +27,12 @@ MainWindow::MainWindow(QWidget *parent)
     QWidget *centralWidget = new QWidget(this);
     this->setCentralWidget( centralWidget );
     QGridLayout *layout = new QGridLayout( centralWidget );
+    QGridLayout *insideLayout = new QGridLayout();
 
-    layout->addWidget(m_button);
-    layout->addWidget(textInput);
-    layout->addWidget(view);
-    //    setCentralWidget(view);
+    layout->addLayout(insideLayout, 0, 0);
+    insideLayout->addWidget(m_button, 0, 0);
+    insideLayout->addWidget(textInput, 1, 0);
+    layout->addWidget(view, 0, 1);
 }
 
 void MainWindow::handleButton()
