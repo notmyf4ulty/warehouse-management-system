@@ -8,6 +8,10 @@
 #include <QGridLayout>
 #include <QWidget>
 #include <QLineEdit>
+#include <QFileDialog>
+#include <QString>
+#include <QDebug>
+#include <QVector>
 
 namespace Ui {
     class MainWindow;
@@ -26,6 +30,7 @@ private:
     QTableView *view;
     QSqlQueryModel *model;
     QLineEdit *textInput;
+    QString addElementsQuery;
 };
 
 #endif // MAINWINDOW_H

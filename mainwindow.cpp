@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
 
     // Create the button, make "this" the parent
-    m_button = new QPushButton("My Button");//, this);
+    m_button = new QPushButton("Choose CSV file");
     // set size and location of the button
     m_button->setGeometry(QRect(QPoint(100, 100), QSize(200, 50)));
     // Connect button signal to appropriate slot
@@ -37,10 +37,47 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::handleButton()
 {
-    // change the text
-    m_button->setText("Example");
-    // resize button
-    m_button->resize(100,100);
+    QString fileName = QFileDialog::getOpenFileName(this,
+        tr("Choose CSV file"), "/home/przemek", tr("CSV File (*.csv)"));
+
+    qDebug() << fileName << endl;
+
+    QFile file(fileName);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        qDebug() << "ERROR" << endl;
+
+    int isFirstLine = 0;
+    addElementsQuery = "INSERT INTO mojaTabela (";
+
+    while (!file.atEnd()) {
+        if(isFirstLine == 2) {
+            QString line = file.readLine();
+            line.insert(0,"\"");
+            line.insert(line.indexOf(","),"\"");
+            addElementsQuery += ",(" + line + ")";
+        }
+        else if(isFirstLine == 1) {
+            QString line = file.readLine();
+            line.insert(0,"\"");
+            line.insert(line.indexOf(","),"\"");
+            addElementsQuery +="(" + line + ")";
+            isFirstLine++;
+        }
+        else {
+            QString line = file.readLine();
+//            line.insert(0,"\"");
+//            line.insert(line.indexOf(","),"\"");
+//            line.insert(line.indexOf(",")+1,"\"");
+//            line.insert(line.indexOf(*(line.end()-1)),"\"");
+            addElementsQuery += line + ") VALUES " ;
+            isFirstLine++;
+        }
+    }
+    addElementsQuery += ";";
+    qDebug() << addElementsQuery << endl;
+    QString maurycy = "NO ELO";
+    qDebug() << maurycy;
+    model->setQuery(addElementsQuery);
 }
 
 void MainWindow::handleTextInput()
