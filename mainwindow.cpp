@@ -65,10 +65,6 @@ void MainWindow::handleButton()
         }
         else {
             QString line = file.readLine();
-//            line.insert(0,"\"");
-//            line.insert(line.indexOf(","),"\"");
-//            line.insert(line.indexOf(",")+1,"\"");
-//            line.insert(line.indexOf(*(line.end()-1)),"\"");
             addElementsQuery += line + ") VALUES " ;
             isFirstLine++;
         }

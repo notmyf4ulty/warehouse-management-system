@@ -7,9 +7,14 @@ using namespace std;
 
 dbConnector::dbConnector()
 {
-    hostName = "localhost";
-    databaseName = "sakila";
-    userName = "tutorial";
+//    hostName = "localhost";
+//    databaseName = "sakila";
+//    userName = "tutorial";
+//    password = "password";
+
+    hostName = "db4free.net";
+    databaseName = "wmscpp";
+    userName = "wmsuser";
     password = "password";
 }
 
