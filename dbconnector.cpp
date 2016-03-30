@@ -29,16 +29,3 @@ void dbConnector::runDatabase()
     if(!db.open())
         qDebug() << "Error while opening database";
 }
-
-void dbConnector::runQueryInConsole(QString queryCommand)
-{
-    QSqlQuery query;
-    query.exec(queryCommand);
-
-    while (query.next()) {
-        for (int i = 0 ; i < 4 ; ++i) {
-            qDebug() << query.value(i).toString();
-        }
-        qDebug() << endl;
-    }
-}

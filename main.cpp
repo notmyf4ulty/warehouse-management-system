@@ -19,10 +19,7 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    dbConnector db;
-    db.runDatabase();
-
-    MainWindow mainWindow;
+    MainWindow mainWindow(&app);
     mainWindow.show();
     return app.exec();
 }
