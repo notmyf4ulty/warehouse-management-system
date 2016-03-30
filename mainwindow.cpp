@@ -23,6 +23,10 @@ MainWindow::MainWindow(QApplication *_app, QWidget *parent)
     view = new QTableView;
     view->setModel(model);
     view->setSelectionBehavior(QAbstractItemView::SelectRows);
+    connect(view,
+            SIGNAL(clicked(const QModelIndex &)),
+            this,
+            SLOT(onTableClicked(const QModelIndex &)));
 
     setMenuBar();
 
@@ -102,9 +106,19 @@ void MainWindow::configureDatabase()
 {
     db = new dbConnector();
     db->runDatabase();
+    model->setQuery("SELECT * FROM mojaTabela;");
 }
 
 void MainWindow::quitApp()
 {
     app->quit();
+}
+
+void MainWindow::onTableClicked(const QModelIndex &index)
+{
+    if (index.isValid()) {
+
+//        QString cellText = index.data().toString();
+        qDebug() << model->index(index.row(),1).data().toString() << endl;
+    }
 }

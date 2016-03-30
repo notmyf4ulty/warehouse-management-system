@@ -15,6 +15,7 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QApplication>
+#include <QList>
 #include "dbconnector.h"
 
 namespace Ui {
@@ -31,6 +32,7 @@ private slots:
     void handleTextInput();
     void configureDatabase();
     void quitApp();
+    void onTableClicked(const QModelIndex &index);
 private:
     QApplication *app;
 
