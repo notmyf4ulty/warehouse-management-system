@@ -1,26 +1,16 @@
 #include "dbconnector.h"
-#include <QSqlDatabase>
-#include <QDebug>
-#include <QSqlQuery>
+
 
 using namespace std;
 
 dbConnector::dbConnector() {
-//    hostName = "localhost";
-//    databaseName = "sakila";
-//    userName = "tutorial";
-//    password = "password";
-
     hostName = "db4free.net";
     databaseName = "wmscpp";
     userName = "wmsuser";
     password = "password";
-//    model = new QSqlQueryModel(this);
     model.setHeaderData(0, Qt::Horizontal, "Typ");
     model.setHeaderData(1, Qt::Horizontal, "Wartość");
 }
-
-
 
 void dbConnector::runDatabase()
 {
@@ -33,3 +23,5 @@ void dbConnector::runDatabase()
     if(!database.open())
         qDebug() << "Error while opening database";
 }
+
+

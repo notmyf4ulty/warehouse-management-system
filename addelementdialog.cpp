@@ -1,7 +1,7 @@
-#include "addelementscreen.h"
+#include "addelementdialog.h"
 
-AddElementDialog::AddElementDialog(QWidget *parent)
-    : QDialog(parent) {
+AddElementDialog::AddElementDialog(QWidget *parent) {
+    //: QDialog(parent) {
 
     modelInput = new QLineEdit();
     packageInput = new QLineEdit();
@@ -12,7 +12,7 @@ AddElementDialog::AddElementDialog(QWidget *parent)
     quantityLabel = new QLabel(tr("Quantity"));
 
     addButton = new QPushButton(tr("Add"));
-    connect(addButton, SIGNAL(clicked()), this, SLOT(addElements()));
+    connect(addButton, SIGNAL(clicked()), this, SLOT(addButtonHandle()));
     cancelButton = new QPushButton(tr("Cancel"));
 
     gridLayout = new QGridLayout(this);
@@ -25,9 +25,15 @@ AddElementDialog::AddElementDialog(QWidget *parent)
     gridLayout->addWidget(addButton,2,0);
     gridLayout->addWidget(cancelButton,2,1);
 
+    model = &dbConnector::getInstance().getModel();
 }
 
-bool AddElementDialog::addElements()
+void AddElementDialog::addButtonHandle()
 {
-    dbConnector::getInstance();
+    QString query = "";
+    query += "INSERT INTO component (model, package, quantity) VALUES (\"" + modelInput->text().toUpper();
+    query += "\", \"" + packageInput->text().toUpper();
+    query += "\", " + quantityInput->text();
+    query += ");";
+    model->setQuery(query);
 }

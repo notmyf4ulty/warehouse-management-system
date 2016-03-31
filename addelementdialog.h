@@ -7,12 +7,17 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QGridLayout>
+#include <QSqlQueryModel>
+#include <QString>
+#include <QDebug>
 #include "dbconnector.h"
 
 class AddElementDialog : public QDialog
 {
+    Q_OBJECT
+
 public:
-    AddElementDialog(QWidget *parent = 0);
+    explicit AddElementDialog(QWidget *parent = 0);
 
 private:
     QLabel *modelLabel;
@@ -25,9 +30,10 @@ private:
     QPushButton *addButton;
     QPushButton *cancelButton;
     QGridLayout *gridLayout;
+    QSqlQueryModel *model;
 
 private slots:
-    bool addElements();
+    void addButtonHandle();
 };
 
 #endif // ADDELEMENTSCREEN_H

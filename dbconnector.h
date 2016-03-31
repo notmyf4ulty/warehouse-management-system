@@ -1,7 +1,13 @@
 #ifndef DBCONNECTOR_H
 #define DBCONNECTOR_H
+
+#include <QObject>
+#include <QTranslator>
 #include <QSqlDatabase>
 #include <QSqlQueryModel>
+#include <QSqlDatabase>
+#include <QDebug>
+#include <QSqlQuery>
 
 class dbConnector
 {

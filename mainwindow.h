@@ -18,7 +18,7 @@
 #include <QApplication>
 #include <QList>
 #include "dbconnector.h"
-#include "addelementscreen.h"
+#include "addelementdialog.h"
 
 namespace Ui {
     class MainWindow;
@@ -27,8 +27,10 @@ namespace Ui {
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
+
 public:
     explicit MainWindow(QApplication *_app, QWidget *parent = 0);
+
 private slots:
     void importCSV();
     void handleTextInput();
@@ -36,9 +38,9 @@ private slots:
     void quitApp();
     void onTableClicked(const QModelIndex &index);
     void addNewElements();
+
 private:
     QApplication *app;
-
     QPushButton *m_button;
     QTableView *view;
     QSqlQueryModel *model;
@@ -47,8 +49,6 @@ private:
     QMenu *fileMenu;
     QMenu *helpMenu;
     QMenu *addMenu;
-
-
     void setMenuBar();
 
 };

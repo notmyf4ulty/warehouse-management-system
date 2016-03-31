@@ -14,14 +14,13 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = SQL
 TEMPLATE = app
 
-
 SOURCES += main.cpp\
         mainwindow.cpp \
     dbconnector.cpp \
-    addelementscreen.cpp
+    addelementdialog.cpp
 
 HEADERS  += mainwindow.h \
     dbconnector.h \
-    addelementscreen.h
+    addelementdialog.h
 
 FORMS    += mainwindow.ui
