@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QObject>
 #include <QMainWindow>
 #include <QPushButton>
 #include <QTableView>
@@ -17,6 +18,7 @@
 #include <QApplication>
 #include <QList>
 #include "dbconnector.h"
+#include "addelementscreen.h"
 
 namespace Ui {
     class MainWindow;
@@ -33,6 +35,7 @@ private slots:
     void configureDatabase();
     void quitApp();
     void onTableClicked(const QModelIndex &index);
+    void addNewElements();
 private:
     QApplication *app;
 
@@ -43,7 +46,8 @@ private:
     QString addElementsQuery;
     QMenu *fileMenu;
     QMenu *helpMenu;
-    dbConnector *db;
+    QMenu *addMenu;
+
 
     void setMenuBar();
 

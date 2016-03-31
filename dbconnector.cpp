@@ -5,8 +5,7 @@
 
 using namespace std;
 
-dbConnector::dbConnector()
-{
+dbConnector::dbConnector() {
 //    hostName = "localhost";
 //    databaseName = "sakila";
 //    userName = "tutorial";
@@ -16,16 +15,21 @@ dbConnector::dbConnector()
     databaseName = "wmscpp";
     userName = "wmsuser";
     password = "password";
+//    model = new QSqlQueryModel(this);
+    model.setHeaderData(0, Qt::Horizontal, "Typ");
+    model.setHeaderData(1, Qt::Horizontal, "Wartość");
 }
+
+
 
 void dbConnector::runDatabase()
 {
-    db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName(hostName);
-    db.setDatabaseName(databaseName);
-    db.setUserName(userName);
-    db.setPassword(password);
+    database = QSqlDatabase::addDatabase("QMYSQL");
+    database.setHostName(hostName);
+    database.setDatabaseName(databaseName);
+    database.setUserName(userName);
+    database.setPassword(password);
 
-    if(!db.open())
+    if(!database.open())
         qDebug() << "Error while opening database";
 }

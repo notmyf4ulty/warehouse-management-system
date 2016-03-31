@@ -18,10 +18,10 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     dbconnector.cpp \
-    dbfromfile.cpp
+    addelementscreen.cpp
 
 HEADERS  += mainwindow.h \
     dbconnector.h \
-    dbfromfile.h
+    addelementscreen.h
 
 FORMS    += mainwindow.ui

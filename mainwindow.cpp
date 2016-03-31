@@ -16,9 +16,11 @@ MainWindow::MainWindow(QApplication *_app, QWidget *parent)
     textInput = new QLineEdit(this);
     connect(textInput, SIGNAL (returnPressed()), this, SLOT (handleTextInput()));
 
-    model = new QSqlQueryModel(this);
-    model->setHeaderData(0, Qt::Horizontal, "Typ");
-    model->setHeaderData(1, Qt::Horizontal, "Wartość");
+//    model = new QSqlQueryModel(this);
+//    model->setHeaderData(0, Qt::Horizontal, "Typ");
+//    model->setHeaderData(1, Qt::Horizontal, "Wartość");
+
+    model = &(dbConnector::getInstance().getModel());
 
     view = new QTableView;
     view->setModel(model);
@@ -79,34 +81,36 @@ void MainWindow::importCSV()
     qDebug() << addElementsQuery << endl;
     QString maurycy = "NO ELO";
     qDebug() << maurycy;
+//    model->setQuery(addElementsQuery);
     model->setQuery(addElementsQuery);
 }
 
 void MainWindow::handleTextInput()
 {
+//    model->setQuery(textInput->text());
     model->setQuery(textInput->text());
 }
 
-
-
 void MainWindow::setMenuBar()
 {
-    fileMenu = this->menuBar()->addMenu(QObject::tr("&Database"));
-    fileMenu->addAction(QObject::tr("Import CSV file..."), this, SLOT(importCSV()));
-    fileMenu->addAction(QObject::tr("Configure Database"), this, SLOT(configureDatabase()));
+    fileMenu = this->menuBar()->addMenu(tr("&Database"));
+    fileMenu->addAction(tr("Import CSV file..."), this, SLOT(importCSV()));
+    fileMenu->addAction(tr("Configure Database"), this, SLOT(configureDatabase()));
     fileMenu->addSeparator();
-    fileMenu->addAction(QObject::tr("&Quit"), this, SLOT(quitApp()));
+    fileMenu->addAction(tr("&Quit"), this, SLOT(quitApp()));
 
-    helpMenu = this->menuBar()->addMenu(QObject::tr("&Help"));
-    helpMenu->addAction(QObject::tr("About"), this, SLOT(importCSV()));
-    helpMenu->addAction(QObject::tr("About Qt"), this, SLOT(importCSV()));
+    addMenu = this->menuBar()->addMenu((tr("&Add")));
+    addMenu->addAction(tr("&Add new elements"), this, SLOT(addNewElements()));
+
+    helpMenu = this->menuBar()->addMenu(tr("&Help"));
+    helpMenu->addAction(tr("About"), this, SLOT(importCSV()));
+    helpMenu->addAction(tr("About Qt"), this, SLOT(importCSV()));
 }
 
 void MainWindow::configureDatabase()
 {
-    db = new dbConnector();
-    db->runDatabase();
-    model->setQuery("SELECT * FROM mojaTabela;");
+    dbConnector::getInstance().runDatabase();
+//    model->setQuery("SELECT * FROM mojaTabela;");
 }
 
 void MainWindow::quitApp()
@@ -121,4 +125,10 @@ void MainWindow::onTableClicked(const QModelIndex &index)
 //        QString cellText = index.data().toString();
         qDebug() << model->index(index.row(),1).data().toString() << endl;
     }
+}
+
+void MainWindow::addNewElements()
+{
+    AddElementDialog *dialog = new AddElementDialog(this);
+    dialog->show();
 }
