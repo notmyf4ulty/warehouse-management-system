@@ -31,8 +31,7 @@ AddElementDialog::AddElementDialog(QWidget *parent) {
 void AddElementDialog::addButtonHandle()
 {
     QString query = "";
-    query += "INSERT INTO component (model, package, quantity) VALUES (\"" + modelInput->text().toUpper();
-    query += "\", \"" + packageInput->text().toUpper();
+    query += "INSERT INTO component (model, package, quantity) VALUES (\"" + modelInput->text().toUpper() + "\", \"" + packageInput->text().toUpper();
     query += "\", " + quantityInput->text();
     query += ");";
     model->setQuery(query);

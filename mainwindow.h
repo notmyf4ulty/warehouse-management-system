@@ -19,6 +19,7 @@
 #include <QList>
 #include "dbconnector.h"
 #include "addelementdialog.h"
+#include "mysqlcmddialog.h"
 
 namespace Ui {
     class MainWindow;
@@ -33,22 +34,21 @@ public:
 
 private slots:
     void importCSV();
-    void handleTextInput();
     void configureDatabase();
     void quitApp();
     void onTableClicked(const QModelIndex &index);
     void addNewElements();
+    void toolsMySQLcmd();
 
 private:
     QApplication *app;
     QPushButton *m_button;
     QTableView *view;
     QSqlQueryModel *model;
-    QLineEdit *textInput;
     QString addElementsQuery;
     QMenu *fileMenu;
-    QMenu *helpMenu;
     QMenu *addMenu;
+    QMenu *toolsMenu;
     void setMenuBar();
 
 };
