@@ -5,11 +5,21 @@
 MainWindow::MainWindow(QApplication *_app, QWidget *parent)
     : QMainWindow(parent)
 {
-    this->setGeometry(0,0,500,500);
+    //this->setGeometry(0,0,500,500);
     app = _app;
 
-    model = &(dbConnector::getInstance().getModel());
+    centralWidget = new QWidget(this);
+    this->setCentralWidget(centralWidget);
 
+    outerLayout = new QVBoxLayout();
+    topLayout = new QVBoxLayout();
+    bottomLayout = new QHBoxLayout();
+
+    centralWidget->setLayout(outerLayout);
+    outerLayout->addLayout(topLayout);
+    outerLayout->addLayout(bottomLayout);
+
+    model = &(dbConnector::getInstance().getModel());
     view = new QTableView;
     view->setModel(model);
     view->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -17,13 +27,16 @@ MainWindow::MainWindow(QApplication *_app, QWidget *parent)
             SIGNAL(clicked(const QModelIndex &)),
             this,
             SLOT(onTableClicked(const QModelIndex &)));
+    topLayout->addWidget(view);
+
+    addToBasketButton = new QPushButton("Add to basket");
+    openBasketButton = new QPushButton("Open basket");
+    bottomLayout->addWidget(addToBasketButton);
+    bottomLayout->addWidget(openBasketButton);
 
     setMenuBar();
 
-    QWidget *centralWidget = new QWidget(this);
-    this->setCentralWidget( centralWidget );
-    QGridLayout *layout = new QGridLayout( centralWidget );
-    layout->addWidget(view, 0, 0);
+
 }
 
 void MainWindow::importCSV()
@@ -113,4 +126,14 @@ void MainWindow::toolsMySQLcmd()
 {
     MySQLcmdDialog *dialog = new MySQLcmdDialog(this);
     dialog->show();
+}
+
+void MainWindow::addToBasketButtonHandle()
+{
+
+}
+
+void MainWindow::openBasketButtonHandle()
+{
+
 }

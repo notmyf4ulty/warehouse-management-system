@@ -17,12 +17,12 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     dbconnector.cpp \
-    addelementdialog.cpp \
-    mysqlcmddialog.cpp
+    mysqlcmddialog.cpp \
+    addcomponentdialog.cpp
 
 HEADERS  += mainwindow.h \
     dbconnector.h \
-    addelementdialog.h \
-    mysqlcmddialog.h
+    mysqlcmddialog.h \
+    addcomponentdialog.h
 
 FORMS    += mainwindow.ui

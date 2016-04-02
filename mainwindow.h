@@ -6,19 +6,20 @@
 #include <QPushButton>
 #include <QTableView>
 #include <QSqlQueryModel>
-#include <QGridLayout>
+#include <QBoxLayout>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QWidget>
 #include <QLineEdit>
 #include <QFileDialog>
 #include <QString>
 #include <QDebug>
-#include <QVector>
 #include <QMenu>
 #include <QMenuBar>
 #include <QApplication>
 #include <QList>
 #include "dbconnector.h"
-#include "addelementdialog.h"
+#include "addcomponentdialog.h"
 #include "mysqlcmddialog.h"
 
 namespace Ui {
@@ -37,15 +38,22 @@ private slots:
     void configureDatabase();
     void quitApp();
     void onTableClicked(const QModelIndex &index);
-    void addNewElements();
+    void addNewComponent();
     void toolsMySQLcmd();
+    void addToBasketButtonHandle();
+    void openBasketButtonHandle();
 
 private:
     QApplication *app;
-    QPushButton *m_button;
+    QWidget *centralWidget;
     QTableView *view;
     QSqlQueryModel *model;
+    QVBoxLayout *outerLayout;
+    QVBoxLayout *topLayout;
+    QHBoxLayout *bottomLayout;
     QString addElementsQuery;
+    QPushButton *addToBasketButton;
+    QPushButton *openBasketButton;
     QMenu *fileMenu;
     QMenu *addMenu;
     QMenu *toolsMenu;
