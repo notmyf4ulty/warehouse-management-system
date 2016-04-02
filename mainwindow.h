@@ -55,7 +55,7 @@ private:
     QPushButton *addToBasketButton;
     QPushButton *openBasketButton;
     QMenu *fileMenu;
-    QMenu *addMenu;
+    QMenu *componentsMenu;
     QMenu *toolsMenu;
     void setMenuBar();
 

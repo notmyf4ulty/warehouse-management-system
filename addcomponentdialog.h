@@ -1,5 +1,5 @@
-#ifndef ADDELEMENTSCREEN_H
-#define ADDELEMENTSCREEN_H
+#ifndef ADDCOMPONENTDIALOG_H
+#define ADDCOMPONENTDIALOG_H
 
 #include <QObject>
 #include <QDialog>
@@ -12,25 +12,40 @@
 #include <QDebug>
 #include "dbconnector.h"
 
-class AddElementDialog : public QDialog
+class AddComponentDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit AddElementDialog(QWidget *parent = 0);
+    explicit AddComponentDialog(QWidget *parent = 0);
 
 private:
-    QLabel *modelLabel;
+    QLabel *componentLabel;
+    QLabel *codeLabel;
+    QLabel *valueLabel;
     QLabel *packageLabel;
+    QLabel *packageCaseLabel;
+    QLabel *toleranceLabel;
+    QLabel *powerLabel;
     QLabel *quantityLabel;
-    QLabel *communicateLabel;
-    QLineEdit *modelInput;
+    QLineEdit *componentInput;
+    QLineEdit *codeInput;
+    QLineEdit *valueInput;
     QLineEdit *packageInput;
+    QLineEdit *packageCaseInput;
+    QLineEdit *toleranceInput;
+    QLineEdit *powerInput;
     QLineEdit *quantityInput;
     QPushButton *addButton;
     QPushButton *cancelButton;
-    QGridLayout *gridLayout;
+    QVBoxLayout *outerLayout;
+    QHBoxLayout *componentInputLayout;
+    QVBoxLayout *inputLayout;
+    QVBoxLayout *labelLayout;
+    QHBoxLayout *buttonsLayout;
+//    QGridLayout *gridLayout;
     QSqlQueryModel *model;
+
 
 private slots:
     void addButtonHandle();

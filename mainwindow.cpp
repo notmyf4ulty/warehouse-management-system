@@ -89,8 +89,9 @@ void MainWindow::setMenuBar()
     fileMenu->addSeparator();
     fileMenu->addAction(tr("&Quit"), this, SLOT(quitApp()));
 
-    addMenu = this->menuBar()->addMenu(tr("&Add"));
-    addMenu->addAction(tr("&Add new elements"), this, SLOT(addNewElements()));
+    componentsMenu = this->menuBar()->addMenu(tr("&Components"));
+    componentsMenu->addAction(tr("&Add new components"), this, SLOT(addNewComponent()));
+    componentsMenu->addAction(tr("&Delete components"), this, SLOT());
 
     toolsMenu = this->menuBar()->addMenu(tr("&Tools"));
     toolsMenu->addAction(tr("&MySQL command line"), this, SLOT(toolsMySQLcmd()));
@@ -116,9 +117,9 @@ void MainWindow::onTableClicked(const QModelIndex &index)
     }
 }
 
-void MainWindow::addNewElements()
+void MainWindow::addNewComponent()
 {
-    AddElementDialog *dialog = new AddElementDialog(this);
+    AddComponentDialog *dialog = new AddComponentDialog(this);
     dialog->show();
 }
 
