@@ -11,26 +11,43 @@ MainWindow::MainWindow(QApplication *_app, QWidget *parent)
     centralWidget = new QWidget(this);
     this->setCentralWidget(centralWidget);
 
+    componentLabel = new QLabel(tr("Choose component table"));
+    componentComboBox = new QComboBox();
+
+    addToBasketButton = new QPushButton("Add to basket");
+    openBasketButton = new QPushButton("Open basket");
+
+    model = &dbConnector::getInstance().getModel();
+    view = new QTableView;
+
     outerLayout = new QVBoxLayout();
-    topLayout = new QVBoxLayout();
+    topLayout = new QHBoxLayout();
+    tableLayout = new QVBoxLayout();
     bottomLayout = new QHBoxLayout();
 
-    centralWidget->setLayout(outerLayout);
-    outerLayout->addLayout(topLayout);
-    outerLayout->addLayout(bottomLayout);
+    componentComboBox->addItem(tr("<none>"));
+    componentComboBox->addItem(tr("Resistors"));
+    componentComboBox->addItem(tr("Capacitors"));
+    componentComboBox->addItem(tr("Transistors"));
 
-    model = &(dbConnector::getInstance().getModel());
-    view = new QTableView;
     view->setModel(model);
     view->setSelectionBehavior(QAbstractItemView::SelectRows);
     connect(view,
             SIGNAL(clicked(const QModelIndex &)),
             this,
             SLOT(onTableClicked(const QModelIndex &)));
-    topLayout->addWidget(view);
 
-    addToBasketButton = new QPushButton("Add to basket");
-    openBasketButton = new QPushButton("Open basket");
+
+    connect(addToBasketButton, SIGNAL(clicked()), this, SLOT(addToBasketButtonHandle()));
+
+    centralWidget->setLayout(outerLayout);
+    outerLayout->addLayout(topLayout);
+    outerLayout->addLayout(tableLayout);
+    outerLayout->addLayout(bottomLayout);
+
+    topLayout->addWidget(componentLabel);
+    topLayout->addWidget(componentComboBox);
+    tableLayout->addWidget(view);
     bottomLayout->addWidget(addToBasketButton);
     bottomLayout->addWidget(openBasketButton);
 
@@ -131,7 +148,8 @@ void MainWindow::toolsMySQLcmd()
 
 void MainWindow::addToBasketButtonHandle()
 {
-
+    addToBasketDialog *dialog = new addToBasketDialog(this);
+    dialog->show();
 }
 
 void MainWindow::openBasketButtonHandle()

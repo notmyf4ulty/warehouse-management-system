@@ -19,12 +19,14 @@ SOURCES += main.cpp\
     dbconnector.cpp \
     mysqlcmddialog.cpp \
     addcomponentdialog.cpp \
-    addtobasketdialog.cpp
+    addtobasketdialog.cpp \
+    component.cpp
 
 HEADERS  += mainwindow.h \
     dbconnector.h \
     mysqlcmddialog.h \
     addcomponentdialog.h \
-    addtobasketdialog.h
+    addtobasketdialog.h \
+    component.h
 
 FORMS    += mainwindow.ui

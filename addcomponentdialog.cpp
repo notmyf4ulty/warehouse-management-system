@@ -58,16 +58,6 @@ AddComponentDialog::AddComponentDialog(QWidget *parent) {
     buttonsLayout->addWidget(addButton);
     buttonsLayout->addWidget(cancelButton);
 
-    //    gridLayout = new QGridLayout(this);
-    //    gridLayout->addWidget(modelInput,0,0);
-    //    gridLayout->addWidget(packageInput,0,1);
-    //    gridLayout->addWidget(quantityInput,0,2);
-    //    gridLayout->addWidget(modelLabel,1,0);
-    //    gridLayout->addWidget(packageLabel,1,1);
-    //    gridLayout->addWidget(quantityLabel,1,2);
-    //    gridLayout->addWidget(addButton,2,0);
-    //    gridLayout->addWidget(cancelButton,2,1);
-
     model = &dbConnector::getInstance().getModel();
 }
 

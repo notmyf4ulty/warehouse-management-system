@@ -11,6 +11,7 @@
 #include <QHBoxLayout>
 #include <QWidget>
 #include <QLineEdit>
+#include <QLabel>
 #include <QFileDialog>
 #include <QString>
 #include <QDebug>
@@ -18,8 +19,10 @@
 #include <QMenuBar>
 #include <QApplication>
 #include <QList>
+#include <QComboBox>
 #include "dbconnector.h"
 #include "addcomponentdialog.h"
+#include "addtobasketdialog.h"
 #include "mysqlcmddialog.h"
 
 namespace Ui {
@@ -48,10 +51,13 @@ private:
     QWidget *centralWidget;
     QTableView *view;
     QSqlQueryModel *model;
+    QLabel *componentLabel;
     QVBoxLayout *outerLayout;
-    QVBoxLayout *topLayout;
+    QHBoxLayout *topLayout;
+    QVBoxLayout *tableLayout;
     QHBoxLayout *bottomLayout;
     QString addElementsQuery;
+    QComboBox *componentComboBox;
     QPushButton *addToBasketButton;
     QPushButton *openBasketButton;
     QMenu *fileMenu;
