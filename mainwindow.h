@@ -20,9 +20,14 @@
 #include <QApplication>
 #include <QList>
 #include <QComboBox>
+#include <QModelIndex>
+#include <QVector>
 #include "dbconnector.h"
 #include "addcomponentdialog.h"
 #include "addtobasketdialog.h"
+#include "basketdialog.h"
+#include "component.h"
+#include "basket.h"
 #include "mysqlcmddialog.h"
 
 namespace Ui {
@@ -51,11 +56,18 @@ private:
     QWidget *centralWidget;
     QTableView *view;
     QSqlQueryModel *model;
+    const QModelIndex *currentTableIndex;
+    Basket *basket;
     QLabel *componentLabel;
+    QLabel *setQuantityLabel;
+    QLabel *setQuantityCommunicateLabel;
+    QLineEdit *setQuantityInput;
     QVBoxLayout *outerLayout;
     QHBoxLayout *topLayout;
     QVBoxLayout *tableLayout;
     QHBoxLayout *bottomLayout;
+    QVBoxLayout *bottomLeftLayout;
+    QHBoxLayout *bottomLeftTopLayout;
     QString addElementsQuery;
     QComboBox *componentComboBox;
     QPushButton *addToBasketButton;

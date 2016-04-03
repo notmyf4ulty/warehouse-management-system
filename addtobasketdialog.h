@@ -12,11 +12,11 @@
 #include <QListView>
 #include <dbconnector.h>
 
-class addToBasketDialog : public QDialog
+class AddToBasketDialog : public QDialog
 {
     Q_OBJECT
 public:
-    explicit addToBasketDialog(QWidget *parent = 0);
+    explicit AddToBasketDialog(QWidget *parent = 0);
 
 signals:
 

@@ -1,6 +1,6 @@
 #include "addtobasketdialog.h"
 
-addToBasketDialog::addToBasketDialog(QWidget *parent) :
+AddToBasketDialog::AddToBasketDialog(QWidget *parent) :
     QDialog(parent)
 {
     loadComponentLabel = new QLabel(tr("Load component"));

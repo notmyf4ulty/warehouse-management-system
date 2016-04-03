@@ -14,16 +14,23 @@ MainWindow::MainWindow(QApplication *_app, QWidget *parent)
     componentLabel = new QLabel(tr("Choose component table"));
     componentComboBox = new QComboBox();
 
-    addToBasketButton = new QPushButton("Add to basket");
-    openBasketButton = new QPushButton("Open basket");
-
     model = &dbConnector::getInstance().getModel();
     view = new QTableView;
+    basket = new Basket();
+
+    setQuantityLabel = new QLabel(tr("Set Quantity: "));
+    setQuantityInput = new QLineEdit();
+    setQuantityCommunicateLabel = new QLabel(tr(""));
+
+    addToBasketButton = new QPushButton("Add to basket");
+    openBasketButton = new QPushButton("Open basket");
 
     outerLayout = new QVBoxLayout();
     topLayout = new QHBoxLayout();
     tableLayout = new QVBoxLayout();
     bottomLayout = new QHBoxLayout();
+    bottomLeftLayout = new QVBoxLayout();
+    bottomLeftTopLayout = new QHBoxLayout();
 
     componentComboBox->addItem(tr("<none>"));
     componentComboBox->addItem(tr("Resistors"));
@@ -37,8 +44,8 @@ MainWindow::MainWindow(QApplication *_app, QWidget *parent)
             this,
             SLOT(onTableClicked(const QModelIndex &)));
 
-
     connect(addToBasketButton, SIGNAL(clicked()), this, SLOT(addToBasketButtonHandle()));
+    connect(openBasketButton, SIGNAL(clicked()), this, SLOT(openBasketButtonHandle()));
 
     centralWidget->setLayout(outerLayout);
     outerLayout->addLayout(topLayout);
@@ -48,12 +55,15 @@ MainWindow::MainWindow(QApplication *_app, QWidget *parent)
     topLayout->addWidget(componentLabel);
     topLayout->addWidget(componentComboBox);
     tableLayout->addWidget(view);
-    bottomLayout->addWidget(addToBasketButton);
+    bottomLayout->addLayout(bottomLeftLayout);
+    bottomLeftLayout->addLayout(bottomLeftTopLayout);
+    bottomLeftTopLayout->addWidget(setQuantityLabel);
+    bottomLeftTopLayout->addWidget(setQuantityInput);
+    bottomLeftTopLayout->addWidget(setQuantityCommunicateLabel);
+    bottomLeftLayout->addWidget(addToBasketButton);
     bottomLayout->addWidget(openBasketButton);
 
     setMenuBar();
-
-
 }
 
 void MainWindow::importCSV()
@@ -108,7 +118,7 @@ void MainWindow::setMenuBar()
 
     componentsMenu = this->menuBar()->addMenu(tr("&Components"));
     componentsMenu->addAction(tr("&Add new components"), this, SLOT(addNewComponent()));
-    componentsMenu->addAction(tr("&Delete components"), this, SLOT());
+  //  componentsMenu->addAction(tr("&Delete components"), this, SLOT());
 
     toolsMenu = this->menuBar()->addMenu(tr("&Tools"));
     toolsMenu->addAction(tr("&MySQL command line"), this, SLOT(toolsMySQLcmd()));
@@ -130,6 +140,7 @@ void MainWindow::onTableClicked(const QModelIndex &index)
     if (index.isValid()) {
 
 //        QString cellText = index.data().toString();
+        currentTableIndex = &index;
         qDebug() << model->index(index.row(),1).data().toString() << endl;
     }
 }
@@ -148,11 +159,22 @@ void MainWindow::toolsMySQLcmd()
 
 void MainWindow::addToBasketButtonHandle()
 {
-    addToBasketDialog *dialog = new addToBasketDialog(this);
-    dialog->show();
+//    AddToBasketDialog *dialog = new AddToBasketDialog(this);
+//    dialog->show();
+//    QString componentCode = model->index(currentTableIndex->row(),0).data().toString();
+    Component component(Component::componentType::RESISTOR,
+                        model->index(currentTableIndex->row(),0).data().toString(),
+                        setQuantityInput->text().toInt());
+    basket->addToBasket(component);
+    QVector<Component> vec = basket->getBasketComponents();
+
+    for (auto iter = vec.begin(); iter != vec.end(); iter++)
+        qDebug() << (*iter).toString();
+
 }
 
 void MainWindow::openBasketButtonHandle()
 {
-
+    BasketDialog *dialog = new BasketDialog(this);
+    dialog->show();
 }

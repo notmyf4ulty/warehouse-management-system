@@ -7,7 +7,8 @@
 QT       += core gui
 QT       += sql
 QTPLUGIN += qsqlmysql
-CONFIG += console
+CONFIG += console\
+    c++11
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -20,13 +21,17 @@ SOURCES += main.cpp\
     mysqlcmddialog.cpp \
     addcomponentdialog.cpp \
     addtobasketdialog.cpp \
-    component.cpp
+    component.cpp \
+    basketdialog.cpp \
+    basket.cpp
 
 HEADERS  += mainwindow.h \
     dbconnector.h \
     mysqlcmddialog.h \
     addcomponentdialog.h \
     addtobasketdialog.h \
-    component.h
+    component.h \
+    basketdialog.h \
+    basket.h
 
 FORMS    += mainwindow.ui
