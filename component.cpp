@@ -41,7 +41,7 @@ QString Component::componentTypeToString()
 
 QString Component::toString()
 {
-    return "A " + componentTypeToString() + " of code " + code + " and a quantity of " + QString::number(quantity);
+    return componentTypeToString() + " " + code + ": " + QString::number(quantity);
 }
 Component::componentType Component::getType() const
 {

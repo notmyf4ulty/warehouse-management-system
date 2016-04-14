@@ -58,6 +58,7 @@ private:
     QSqlQueryModel *model;
     const QModelIndex *currentTableIndex;
     Basket *basket;
+//    QVector<Component> *basketComponents;
     QLabel *componentLabel;
     QLabel *setQuantityLabel;
     QLabel *setQuantityCommunicateLabel;

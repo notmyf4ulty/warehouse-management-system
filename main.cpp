@@ -26,7 +26,7 @@ void testInConsole();
 
 int main(int argc, char *argv[])
 {
-    testInConsole();
+//    testInConsole();
     QApplication app(argc, argv);
 
     MainWindow mainWindow(&app);
@@ -34,6 +34,6 @@ int main(int argc, char *argv[])
     return app.exec();
 }
 
-void testInConsole() {
-    Basket basket;
-}
+//void testInConsole() {
+//    Basket basket;
+//}

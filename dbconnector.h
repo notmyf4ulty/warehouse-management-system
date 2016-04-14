@@ -25,7 +25,7 @@ private:
 
 public:
     static dbConnector &getInstance() { static dbConnector instance; return instance; }
-    void runDatabase();
+    bool runDatabase();
     QSqlQueryModel &getModel() { return model; }
 };
 

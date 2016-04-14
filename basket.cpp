@@ -19,8 +19,8 @@ void Basket::addToBasket(const Component &component)
         basketComponents.push_back(component);
 }
 
-QVector<Component> Basket::getBasketComponents() const
-{
-    return basketComponents;
-}
+//QVector<Component> &Basket::getBasketComponents()
+//{
+//    return basketComponents;
+//}
 

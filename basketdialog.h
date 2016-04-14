@@ -5,6 +5,13 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QVector>
+#include "component.h"
+#include "basket.h"
+#include <QStringList>
+#include <QStringListModel>
+#include <QListView>
+#include <QDebug>
 
 class BasketDialog : public QDialog
 {

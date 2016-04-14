@@ -9,13 +9,14 @@
 class Basket
 {
 public:
-    Basket();
-    ~Basket() {}
     void addToBasket(const Component &component);
-    QVector<Component> getBasketComponents() const;
+    QVector<Component> &getBasketComponents() {return basketComponents;}
     void setBasketComponents(const QVector<Component> &value);
+    static Basket &getInstance() { static Basket instance; return instance; }
 
 private:
+    Basket();
+    ~Basket() {}
     QVector<Component> basketComponents;
     QStringList basketComponentsStringList;
     QStringListModel basketComponentsModel;

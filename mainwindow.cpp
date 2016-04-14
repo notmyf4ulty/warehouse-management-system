@@ -16,7 +16,7 @@ MainWindow::MainWindow(QApplication *_app, QWidget *parent)
 
     model = &dbConnector::getInstance().getModel();
     view = new QTableView;
-    basket = new Basket();
+//    basket = new Basket();
 
     setQuantityLabel = new QLabel(tr("Set Quantity: "));
     setQuantityInput = new QLineEdit();
@@ -165,10 +165,12 @@ void MainWindow::addToBasketButtonHandle()
     Component component(Component::componentType::RESISTOR,
                         model->index(currentTableIndex->row(),0).data().toString(),
                         setQuantityInput->text().toInt());
-    basket->addToBasket(component);
-    QVector<Component> vec = basket->getBasketComponents();
+//    basket->addToBasket(component);
+    Basket::getInstance().addToBasket(component);
+//    QVector<Component> basketComponents = basket->getBasketComponents();
+    QVector<Component> basketComponents = Basket::getInstance().getBasketComponents();
 
-    for (auto iter = vec.begin(); iter != vec.end(); iter++)
+    for (auto iter = basketComponents.begin(); iter != basketComponents.end(); iter++)
         qDebug() << (*iter).toString();
 
 }

@@ -12,11 +12,11 @@ dbConnector::dbConnector() {
     databaseName = "mojaBaza";
     userName = "tutorial";
     password = "password";
-    model.setHeaderData(0, Qt::Horizontal, "Typ");
-    model.setHeaderData(1, Qt::Horizontal, "Wartość");
+//    model.setHeaderData(0, Qt::Horizontal, "Typ");
+//    model.setHeaderData(1, Qt::Horizontal, "Wartość");
 }
 
-void dbConnector::runDatabase()
+bool dbConnector::runDatabase()
 {
     database = QSqlDatabase::addDatabase("QMYSQL");
     database.setHostName(hostName);
@@ -26,7 +26,9 @@ void dbConnector::runDatabase()
     database.setPort(3306);
 
     if(!database.open())
-        qDebug() << "Error while opening database";
+        return false;
+
+    return true;
 }
 
 
