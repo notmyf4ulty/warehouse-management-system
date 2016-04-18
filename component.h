@@ -2,6 +2,7 @@
 #define COMPONENT_H
 
 #include <QString>
+#include "dbconnector.h"
 
 class Component
 {
@@ -13,12 +14,16 @@ public:
     };
 
     Component() = default;
-    Component(componentType _type, QString _code, int _quantity)
-        : type(_type), code(_code), quantity(_quantity) {}
-//    Component(const Component &component)
-//        : type(component.getType()),
-//          code(component.getModel()),
-//          quantity(component.getQuantity()) {}
+    Component(QString _code,
+              QString _package,
+              QString _packageCase,
+              int _quantity,
+              QString _moreInfo)
+        : code(_code),
+          package(_package),
+          packageCase(_packageCase),
+          quantity(_quantity),
+          moreInfo(_moreInfo) {}
     ~Component() {}
 
     componentType getType() const;
@@ -33,6 +38,7 @@ public:
     QString componentTypeToString();
     QString toString();
     QString componentTypeToQuery();
+    QString toQuery();
 
     inline bool operator==(const Component& rhs) {
         return ((type == rhs.type) && (code == rhs.code)) ? true : false;}
@@ -49,10 +55,16 @@ public:
 
 
 
-private:
+protected:
     componentType type;
+//    QString code;
+//    int quantity;
     QString code;
+    QString package;
+    QString packageCase;
     int quantity;
+    QString moreInfo;
+
 };
 
 #endif // COMPONENT_H

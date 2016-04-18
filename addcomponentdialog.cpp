@@ -115,6 +115,20 @@ void AddComponentDialog::hideAll()
     quantityLabel->hide();
 }
 
+void AddComponentDialog::cleanInputs()
+{
+    codeInput->setText("");
+    valueInput->setText("");
+    typeInput->setText("");
+    packageInput->setText("");
+    packageCaseInput->setText("");
+    powerInput->setText("");
+    voltageInput->setText("");
+    moreInfoInput->setText("");
+    toleranceInput->setText("");
+    quantityInput->setText("");
+}
+
 void AddComponentDialog::showDefaultProperties()
 {
 //    componentInput->show();
@@ -170,18 +184,65 @@ void AddComponentDialog::showTransistorProperties()
     typeLabel->show();
 }
 
-void AddComponentDialog::addButtonHandle()
+QString AddComponentDialog::addResistor()
 {
     QString query = "";
-    query += "INSERT INTO " + componentInput->text().toLower()
-            + " (code, value, package, packageCase, tolerance, power, quantity) VALUES (\""
+    query += "INSERT INTO resistor (code, value, package, packageCase, tolerance, power, quantity, moreInfo) VALUES (\""
             + codeInput->text() + "\", \""
             + valueInput->text() + "\", \""
             + packageInput->text() + "\", \""
             + packageCaseInput->text() + "\", \""
-            + powerInput->text() + "\", "
             + toleranceInput->text() + "\", \""
-            + quantityInput->text() + ");";
+            + powerInput->text() + "\", "
+            + quantityInput->text() +  ", \""
+            + moreInfoInput->text() + "\");";
+    return query;
+}
+
+QString AddComponentDialog::addCapacitor()
+{
+    QString query = "";
+    query += "INSERT INTO capacitor (code, value, package, packageCase, tolerance, voltage, quantity, moreInfo) VALUES (\""
+            + codeInput->text() + "\", \""
+            + valueInput->text() + "\", \""
+            + packageInput->text() + "\", \""
+            + packageCaseInput->text() + "\", \""
+            + toleranceInput->text() + "\", \""
+            + voltageInput->text() + "\", "
+            + quantityInput->text() +  ", \""
+            + moreInfoInput->text() + "\");";
+    return query;
+}
+
+QString AddComponentDialog::addTransistor()
+{
+    QString query = "";
+    query += "INSERT INTO transistor (code, type, package, packageCase, quantity, moreInfo) VALUES (\""
+            + codeInput->text() + "\", \""
+            + typeInput->text() + "\", \""
+            + packageInput->text() + "\", \""
+            + packageCaseInput->text() + "\", "
+            + quantityInput->text() +  ", \""
+            + moreInfoInput->text() + "\");";
+    return query;
+}
+
+void AddComponentDialog::addButtonHandle()
+{
+    QString query = "";
+    switch(componentChoice->currentIndex()) {
+    case 1:
+        query = addResistor();
+        break;
+    case 2:
+        query = addCapacitor();
+        break;
+    case 3:
+        query = addTransistor();
+        break;
+    default:
+        break;
+    }
     qDebug() << query << endl;
     model->setQuery(query);
 }
@@ -193,20 +254,26 @@ void AddComponentDialog::componentChoiceShowProperties()
     switch(componentChoice->currentIndex()) {
     case 0:
         hideAll();
+        cleanInputs();
         addButton->setEnabled(false);
         break;
     case 1:
         showResistorProperties();
+        cleanInputs();
         break;
     case 2:
         showCapacitorProperties();
+        cleanInputs();
         break;
     case 3:
         showTransistorProperties();
+        cleanInputs();
         break;
     default:
         hideAll();
+        cleanInputs();
         break;
     }
+
     this->adjustSize();
 }

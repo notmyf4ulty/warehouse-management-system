@@ -43,6 +43,11 @@ QString Component::toString()
 {
     return componentTypeToString() + " " + code + ": " + QString::number(quantity);
 }
+
+//QString Component::toQuery()
+//{
+
+//}
 Component::componentType Component::getType() const
 {
     return type;

@@ -23,7 +23,7 @@ SOURCES += main.cpp\
     addtobasketdialog.cpp \
     component.cpp \
     basketdialog.cpp \
-    basket.cpp
+    basket.cpp \
 
 HEADERS  += mainwindow.h \
     dbconnector.h \
@@ -32,6 +32,6 @@ HEADERS  += mainwindow.h \
     addtobasketdialog.h \
     component.h \
     basketdialog.h \
-    basket.h
+    basket.h \
 
 FORMS    += mainwindow.ui

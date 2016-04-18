@@ -159,19 +159,19 @@ void MainWindow::toolsMySQLcmd()
 
 void MainWindow::addToBasketButtonHandle()
 {
-//    AddToBasketDialog *dialog = new AddToBasketDialog(this);
-//    dialog->show();
-//    QString componentCode = model->index(currentTableIndex->row(),0).data().toString();
-    Component component(Component::componentType::RESISTOR,
-                        model->index(currentTableIndex->row(),0).data().toString(),
-                        setQuantityInput->text().toInt());
-//    basket->addToBasket(component);
-    Basket::getInstance().addToBasket(component);
-//    QVector<Component> basketComponents = basket->getBasketComponents();
-    QVector<Component> basketComponents = Basket::getInstance().getBasketComponents();
+////    AddToBasketDialog *dialog = new AddToBasketDialog(this);
+////    dialog->show();
+////    QString componentCode = model->index(currentTableIndex->row(),0).data().toString();
+//    Component component(Component::componentType::RESISTOR,
+//                        model->index(currentTableIndex->row(),0).data().toString(),
+//                        setQuantityInput->text().toInt());
+////    basket->addToBasket(component);
+//    Basket::getInstance().addToBasket(component);
+////    QVector<Component> basketComponents = basket->getBasketComponents();
+//    QVector<Component> basketComponents = Basket::getInstance().getBasketComponents();
 
-    for (auto iter = basketComponents.begin(); iter != basketComponents.end(); iter++)
-        qDebug() << (*iter).toString();
+//    for (auto iter = basketComponents.begin(); iter != basketComponents.end(); iter++)
+//        qDebug() << (*iter).toString();
 
 }
 

@@ -12,6 +12,7 @@
 #include <QString>
 #include <QDebug>
 #include "dbconnector.h"
+#include "component.h"
 
 class AddComponentDialog : public QDialog
 {
@@ -55,13 +56,18 @@ private:
     QVBoxLayout *labelLayout;
     QHBoxLayout *buttonsLayout;
 //    QGridLayout *gridLayout;
+    Component *component;
     QSqlQueryModel *model;
 
     void hideAll();
+    void cleanInputs();
     void showDefaultProperties();
     void showResistorProperties();
     void showCapacitorProperties();
     void showTransistorProperties();
+    QString addResistor();
+    QString addCapacitor();
+    QString addTransistor();
 
 private slots:
     void addButtonHandle();
