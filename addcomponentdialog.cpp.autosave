@@ -208,5 +208,6 @@ void AddComponentDialog::componentChoiceShowProperties()
         hideAll();
         break;
     }
+    
     this->adjustSize();
 }

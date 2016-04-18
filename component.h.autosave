@@ -2,6 +2,7 @@
 #define COMPONENT_H
 
 #include <QString>
+#include "dbconnector.h"
 
 class Component
 {
@@ -13,12 +14,12 @@ public:
     };
 
     Component() = default;
-    Component(componentType _type, QString _code, int _quantity)
-        : type(_type), code(_code), quantity(_quantity) {}
-//    Component(const Component &component)
-//        : type(component.getType()),
-//          code(component.getModel()),
-//          quantity(component.getQuantity()) {}
+//    Component(componentType _type, QString _code, int _quantity)
+//        : type(_type), code(_code), quantity(_quantity) {}
+////    Component(const Component &component)
+////        : type(component.getType()),
+////          code(component.getModel()),
+////          quantity(component.getQuantity()) {}
     ~Component() {}
 
     componentType getType() const;

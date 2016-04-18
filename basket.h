@@ -11,7 +11,6 @@ class Basket
 public:
     void addToBasket(const Component &component);
     QVector<Component> &getBasketComponents() {return basketComponents;}
-    void setBasketComponents(const QVector<Component> &value);
     static Basket &getInstance() { static Basket instance; return instance; }
 
 private:

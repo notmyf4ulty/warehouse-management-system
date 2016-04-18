@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QDialog>
+#include <QComboBox>
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
@@ -20,22 +21,32 @@ public:
     explicit AddComponentDialog(QWidget *parent = 0);
 
 private:
+    QComboBox *componentChoice;
+
     QLabel *componentLabel;
     QLabel *codeLabel;
     QLabel *valueLabel;
+    QLabel *typeLabel; // HERE
     QLabel *packageLabel;
     QLabel *packageCaseLabel;
     QLabel *toleranceLabel;
     QLabel *powerLabel;
+    QLabel *voltageLabel; // HERE
+    QLabel *moreInfoLabel; // HERE
     QLabel *quantityLabel;
+
     QLineEdit *componentInput;
     QLineEdit *codeInput;
     QLineEdit *valueInput;
+    QLineEdit *typeInput; // HERE
     QLineEdit *packageInput;
     QLineEdit *packageCaseInput;
     QLineEdit *toleranceInput;
     QLineEdit *powerInput;
+    QLineEdit *voltageInput; // HERE
+    QLineEdit *moreInfoInput; // HERE
     QLineEdit *quantityInput;
+
     QPushButton *addButton;
     QPushButton *cancelButton;
     QVBoxLayout *outerLayout;
@@ -46,9 +57,15 @@ private:
 //    QGridLayout *gridLayout;
     QSqlQueryModel *model;
 
+    void hideAll();
+    void showDefaultProperties();
+    void showResistorProperties();
+    void showCapacitorProperties();
+    void showTransistorProperties();
 
 private slots:
     void addButtonHandle();
+    void componentChoiceShowProperties();
 };
 
 #endif // ADDELEMENTSCREEN_H

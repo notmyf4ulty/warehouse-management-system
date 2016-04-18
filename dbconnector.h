@@ -6,6 +6,7 @@
 #include <QSqlDatabase>
 #include <QSqlQueryModel>
 #include <QSqlDatabase>
+//#include <QtSql>
 #include <QDebug>
 #include <QSqlQuery>
 
