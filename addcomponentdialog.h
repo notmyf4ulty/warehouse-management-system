@@ -12,7 +12,7 @@
 #include <QString>
 #include <QDebug>
 #include "dbconnector.h"
-#include "component.h"
+#include "basketcomponent.h"
 
 class AddComponentDialog : public QDialog
 {

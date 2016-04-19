@@ -20,8 +20,7 @@ BasketDialog::BasketDialog(QWidget *parent) :
     bottomLayout->addWidget(proceedOrderButton);
     bottomLayout->addWidget(cancelButton);
 
-//    Basket *basket = new Basket();
-    QVector<Component> basketComponents = Basket::getInstance().getBasketComponents();
+    QVector<BasketComponent> basketComponents = Basket::getInstance().getBasketComponents();
     QStringList list;
     for (auto it = basketComponents.begin(); it != basketComponents.end(); ++it) {
         qDebug() << (*it).toString();
@@ -32,6 +31,15 @@ BasketDialog::BasketDialog(QWidget *parent) :
     for (auto it = list.begin(); it != list.end(); ++it)
         qDebug() << (*it);
     QListView *listView = new QListView();
+
+    connect(proceedOrderButton, SIGNAL(clicked(bool)), this, SLOT(proceedOrderButtonHandle()));
+    connect(cancelButton, SIGNAL(clicked(bool)), this, SLOT(close()));
+
     listView->setModel(model);
     topLeftLayout->addWidget(listView);
+}
+
+BasketDialog::proceedOrderButtonHandle()
+{
+    Basket::getInstance().proceedOrder();
 }

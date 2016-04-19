@@ -16,7 +16,6 @@ MainWindow::MainWindow(QApplication *_app, QWidget *parent)
 
     model = &dbConnector::getInstance().getModel();
     view = new QTableView;
-//    basket = new Basket();
 
     setQuantityLabel = new QLabel(tr("Set Quantity: "));
     setQuantityInput = new QLineEdit();
@@ -36,6 +35,7 @@ MainWindow::MainWindow(QApplication *_app, QWidget *parent)
     componentComboBox->addItem(tr("Resistors"));
     componentComboBox->addItem(tr("Capacitors"));
     componentComboBox->addItem(tr("Transistors"));
+    connect(componentComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(showComponentsTable()));
 
     view->setModel(model);
     view->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -63,13 +63,14 @@ MainWindow::MainWindow(QApplication *_app, QWidget *parent)
     bottomLeftLayout->addWidget(addToBasketButton);
     bottomLayout->addWidget(openBasketButton);
 
+    addToBasketButton->setEnabled(false);
     setMenuBar();
 }
 
 void MainWindow::importCSV()
 {
     QString fileName = QFileDialog::getOpenFileName(this,
-        tr("Choose CSV file"), "/home/przemek", tr("CSV File (*.csv)"));
+                                                    tr("Choose CSV file"), "/home/przemek", tr("CSV File (*.csv)"));
 
     qDebug() << fileName << endl;
 
@@ -115,10 +116,34 @@ void MainWindow::setMenuBar()
 
     componentsMenu = this->menuBar()->addMenu(tr("&Components"));
     componentsMenu->addAction(tr("&Add new components"), this, SLOT(addNewComponent()));
-  //  componentsMenu->addAction(tr("&Delete components"), this, SLOT());
+    //  componentsMenu->addAction(tr("&Delete components"), this, SLOT());
 
     toolsMenu = this->menuBar()->addMenu(tr("&Tools"));
     toolsMenu->addAction(tr("&MySQL command line"), this, SLOT(toolsMySQLcmd()));
+}
+
+QString MainWindow::getTableName()
+{
+    QString tableName = "";
+    switch(componentComboBox->currentIndex())
+    {
+    case 1:
+        tableName = "resistor";
+        break;
+    case 2:
+        tableName = "capacitor";
+        break;
+    case 3:
+        tableName = "transistor";
+        break;
+    }
+    return tableName;
+}
+
+void MainWindow::eraseKeyFields()
+{
+    setQuantityInput->setText("");
+    currentTableIndex = 0;
 }
 
 void MainWindow::configureDatabase()
@@ -153,24 +178,41 @@ void MainWindow::toolsMySQLcmd()
 
 void MainWindow::addToBasketButtonHandle()
 {
-////    AddToBasketDialog *dialog = new AddToBasketDialog(this);
-////    dialog->show();
-////    QString componentCode = model->index(currentTableIndex->row(),0).data().toString();
-//    Component component(Component::componentType::RESISTOR,
-//                        model->index(currentTableIndex->row(),0).data().toString(),
-//                        setQuantityInput->text().toInt());
-////    basket->addToBasket(component);
-//    Basket::getInstance().addToBasket(component);
-////    QVector<Component> basketComponents = basket->getBasketComponents();
-//    QVector<Component> basketComponents = Basket::getInstance().getBasketComponents();
-
-//    for (auto iter = basketComponents.begin(); iter != basketComponents.end(); iter++)
-//        qDebug() << (*iter).toString();
-
+    BasketComponent component(
+                model->index(currentTableIndex->row(),0).data().toString(),
+                getTableName(),
+                setQuantityInput->text().toInt()
+                );
+    Basket::getInstance().addToBasket(component);
 }
 
 void MainWindow::openBasketButtonHandle()
 {
     BasketDialog *dialog = new BasketDialog(this);
     dialog->show();
+}
+
+void MainWindow::showComponentsTable()
+{
+    addToBasketButton->setEnabled(true);
+    eraseKeyFields();
+
+    switch(componentComboBox->currentIndex())
+    {
+    case 0:
+        addToBasketButton->setEnabled(false);
+        break;
+    case 1:
+        model->setQuery("SELECT * FROM resistor;");
+        break;
+    case 2:
+        model->setQuery("SELECT * FROM capacitor;");
+        break;
+    case 3:
+        model->setQuery("SELECT * FROM transistor;");
+        break;
+    default:
+        addToBasketButton->setEnabled(false);
+        break;
+    }
 }

@@ -79,6 +79,7 @@ private:
     QMenu *toolsMenu;
     void setMenuBar();
     QString getTableName();
+    void eraseKeyFields();
 
 };
 

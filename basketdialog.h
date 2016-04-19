@@ -6,7 +6,7 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QVector>
-#include "component.h"
+#include "basketcomponent.h"
 #include "basket.h"
 #include <QStringList>
 #include <QStringListModel>
@@ -21,8 +21,8 @@ public:
 
 signals:
 
-public slots:
-
+private slots:
+    proceedOrderButtonHandle();
 private:
     QPushButton *proceedOrderButton;
     QPushButton *cancelButton;
