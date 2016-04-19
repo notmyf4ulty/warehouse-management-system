@@ -102,9 +102,6 @@ void MainWindow::importCSV()
     }
     addElementsQuery += ";";
     qDebug() << addElementsQuery << endl;
-    QString maurycy = "NO ELO";
-    qDebug() << maurycy;
-//    model->setQuery(addElementsQuery);
     model->setQuery(addElementsQuery);
 }
 
@@ -127,7 +124,6 @@ void MainWindow::setMenuBar()
 void MainWindow::configureDatabase()
 {
     dbConnector::getInstance().runDatabase();
-//    model->setQuery("SELECT * FROM mojaTabela;");
 }
 
 void MainWindow::quitApp()
@@ -138,8 +134,6 @@ void MainWindow::quitApp()
 void MainWindow::onTableClicked(const QModelIndex &index)
 {
     if (index.isValid()) {
-
-//        QString cellText = index.data().toString();
         currentTableIndex = &index;
         qDebug() << model->index(index.row(),1).data().toString() << endl;
     }

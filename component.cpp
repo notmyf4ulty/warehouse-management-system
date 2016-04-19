@@ -9,6 +9,7 @@ void Component::setModel(const QString &value)
 {
     code = value;
 }
+
 int Component::getQuantity() const
 {
     return quantity;
@@ -44,10 +45,6 @@ QString Component::toString()
     return componentTypeToString() + " " + code + ": " + QString::number(quantity);
 }
 
-//QString Component::toQuery()
-//{
-
-//}
 Component::componentType Component::getType() const
 {
     return type;

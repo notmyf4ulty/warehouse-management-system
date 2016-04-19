@@ -1,11 +1,10 @@
 #include "addcomponentdialog.h"
 
-AddComponentDialog::AddComponentDialog(QWidget *parent) {
-    //: QDialog(parent) {
-
+AddComponentDialog::AddComponentDialog(QWidget *parent) :
+    QDialog(parent)
+{
     componentChoice = new QComboBox(this);
 
-//    componentInput = new QLineEdit(this);
     codeInput = new QLineEdit(this);
     valueInput = new QLineEdit(this);
     typeInput = new QLineEdit(this);
@@ -17,7 +16,6 @@ AddComponentDialog::AddComponentDialog(QWidget *parent) {
     toleranceInput = new QLineEdit(this);
     quantityInput = new QLineEdit(this);
 
-//    componentLabel = new QLabel(tr("Component"));
     codeLabel = new QLabel(tr("Code"));
     valueLabel = new QLabel(tr("Value"));
     typeLabel = new QLabel(tr("Type"));
@@ -56,7 +54,6 @@ AddComponentDialog::AddComponentDialog(QWidget *parent) {
     componentInputLayout->addLayout(inputLayout);
     outerLayout->addLayout(buttonsLayout);
 
-//    inputLayout->addWidget(componentInput);
     inputLayout->addWidget(codeInput);
     inputLayout->addWidget(valueInput);
     inputLayout->addWidget(typeInput);
@@ -90,7 +87,6 @@ AddComponentDialog::AddComponentDialog(QWidget *parent) {
 
 void AddComponentDialog::hideAll()
 {
-//    componentInput->hide();
     codeInput->hide();
     valueInput->hide();
     typeInput->hide();
@@ -102,7 +98,6 @@ void AddComponentDialog::hideAll()
     toleranceInput->hide();
     quantityInput->hide();
 
-//    componentLabel->hide();
     codeLabel->hide();
     valueLabel->hide();
     typeLabel->hide();
@@ -131,14 +126,12 @@ void AddComponentDialog::cleanInputs()
 
 void AddComponentDialog::showDefaultProperties()
 {
-//    componentInput->show();
     codeInput->show();
     packageInput->show();
     packageCaseInput->show();
     moreInfoInput->show();
     quantityInput->show();
 
-    //    componentLabel->hide();
     codeLabel->show();
     packageLabel->show();
     packageCaseLabel->show();

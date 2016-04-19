@@ -1,0 +1,24 @@
+#include "component.h"
+
+QString Component::getModel() const
+{
+    return code;
+}
+
+int Component::getQuantity() const
+{
+    return quantity;
+}
+
+void Component::setQuantity(int value)
+{
+    quantity = value;
+}
+
+QString Component::toBasketString()
+{
+    return "" + code + ": " + QString::number(quantity);
+}
+
+
+

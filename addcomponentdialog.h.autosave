@@ -27,25 +27,25 @@ private:
     QLabel *componentLabel;
     QLabel *codeLabel;
     QLabel *valueLabel;
-    QLabel *typeLabel; // HERE
+    QLabel *typeLabel;
     QLabel *packageLabel;
     QLabel *packageCaseLabel;
     QLabel *toleranceLabel;
     QLabel *powerLabel;
-    QLabel *voltageLabel; // HERE
-    QLabel *moreInfoLabel; // HERE
+    QLabel *voltageLabel;
+    QLabel *moreInfoLabel;
     QLabel *quantityLabel;
 
     QLineEdit *componentInput;
     QLineEdit *codeInput;
     QLineEdit *valueInput;
-    QLineEdit *typeInput; // HERE
+    QLineEdit *typeInput;
     QLineEdit *packageInput;
     QLineEdit *packageCaseInput;
     QLineEdit *toleranceInput;
     QLineEdit *powerInput;
-    QLineEdit *voltageInput; // HERE
-    QLineEdit *moreInfoInput; // HERE
+    QLineEdit *voltageInput;
+    QLineEdit *moreInfoInput;
     QLineEdit *quantityInput;
 
     QPushButton *addButton;
@@ -55,8 +55,6 @@ private:
     QVBoxLayout *inputLayout;
     QVBoxLayout *labelLayout;
     QHBoxLayout *buttonsLayout;
-//    QGridLayout *gridLayout;
-//    Component *component;
     QSqlQueryModel *model;
 
     void hideAll();

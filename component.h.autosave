@@ -1,0 +1,46 @@
+#ifndef COMPONENT_H
+#define COMPONENT_H
+
+#include <QString>
+#include "dbconnector.h"
+
+class Component
+{
+public:
+    Component() = default;
+//    Component(QString _code,
+//              QString _package,
+//              QString _packageCase,
+//              int _quantity,
+//              QString _moreInfo)
+//        : code(_code),
+//          package(_package),
+//          packageCase(_packageCase),
+//          quantity(_quantity),
+//          moreInfo(_moreInfo) {}
+    ~Component() {}
+
+    int getQuantity() const;
+    void setQuantity(int value);
+
+    QString toBasketString();
+
+    inline bool operator==(const Component& rhs) {
+        return ((type == rhs.type) && (code == rhs.code)) ? true : false;}
+
+    inline Component& operator+=(const Component& rhs) {
+        quantity += rhs.getQuantity();
+        return *this;
+    }
+
+    inline Component& operator+=(const int value) {
+        quantity += value;
+        return *this;
+    }
+
+protected:
+    QString code;
+    int quantity;
+};
+
+#endif // COMPONENT_H
