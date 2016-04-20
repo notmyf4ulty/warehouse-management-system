@@ -30,6 +30,7 @@
 #include "basket.h"
 #include "mysqlcmddialog.h"
 #include "adminlogindialog.h"
+#include "geometry.h"
 
 namespace Ui {
     class MainWindow;

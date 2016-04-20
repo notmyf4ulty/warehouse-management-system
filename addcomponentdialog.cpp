@@ -1,7 +1,7 @@
 #include "addcomponentdialog.h"
 
 AddComponentDialog::AddComponentDialog(QWidget *parent) :
-    QDialog(parent)
+    QDialog(parent), parentWidget(parent)
 {
     componentChoice = new QComboBox(this);
 
@@ -82,7 +82,11 @@ AddComponentDialog::AddComponentDialog(QWidget *parent) :
 
     model = &dbConnector::getInstance().getModel();
 
+    connect(this,SIGNAL(dialogClosed()),this,SLOT(close()));
     this->adjustSize();
+    alignCenter<QDialog>(this);
+    parentWidget->hide();
+//    this->layout()->setSizeConstraint(QLayout::SetFixedSize);
     this->layout()->setSizeConstraint(QLayout::SetFixedSize);
 }
 

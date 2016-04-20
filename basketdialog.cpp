@@ -1,7 +1,7 @@
 #include "basketdialog.h"
 
 BasketDialog::BasketDialog(QWidget *parent) :
-    QDialog(parent)
+    QDialog(parent), parentWidget(parent)
 {
     proceedOrderButton = new QPushButton(tr("Proceed Order"));
     cancelButton = new QPushButton(tr("Cancel"));
@@ -11,6 +11,8 @@ BasketDialog::BasketDialog(QWidget *parent) :
     topLeftLayout = new QVBoxLayout();
     topRightLayout = new QVBoxLayout();
     bottomLayout = new QHBoxLayout();
+
+
 
     outerLayout->addLayout(topLayout);
     outerLayout->addLayout(bottomLayout);
@@ -38,10 +40,16 @@ BasketDialog::BasketDialog(QWidget *parent) :
     listView->setModel(model);
     topLeftLayout->addWidget(listView);
 
+    connect(this,SIGNAL(dialogClosed()),this,SLOT(close()));
+    this->resize(300,300);
+    alignCenter<QDialog>(this);
+    parentWidget->hide();
     this->layout()->setSizeConstraint(QLayout::SetFixedSize);
 }
 
-BasketDialog::proceedOrderButtonHandle()
+void BasketDialog::proceedOrderButtonHandle()
 {
     Basket::getInstance().proceedOrder();
 }
+
+

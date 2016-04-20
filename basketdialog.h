@@ -13,6 +13,9 @@
 #include <QListView>
 #include <QDebug>
 #include <QLayout>
+#include "geometry.h"
+#include <QWidget>
+#include <QKeyEvent>
 
 class BasketDialog : public QDialog
 {
@@ -21,10 +24,11 @@ public:
     explicit BasketDialog(QWidget *parent = 0);
 
 signals:
-
+    void dialogClosed();
 private slots:
-    proceedOrderButtonHandle();
+    void proceedOrderButtonHandle();
 private:
+    QWidget *parentWidget;
     QPushButton *proceedOrderButton;
     QPushButton *cancelButton;
     QVBoxLayout *outerLayout;
@@ -32,6 +36,9 @@ private:
     QVBoxLayout *topLeftLayout;
     QVBoxLayout *topRightLayout;
     QHBoxLayout *bottomLayout;
+    void closeEvent(QCloseEvent *event) {parentWidget->show();
+                                         emit dialogClosed();
+                                         event->accept();}
 };
 
 #endif // BASKETDIALOG_H

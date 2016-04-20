@@ -14,6 +14,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = SQL
 TEMPLATE = app
+DEPENDPATH *= ${INCLUDEPATH}
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -34,6 +35,7 @@ HEADERS  += mainwindow.h \
     basket.h \
     basketcomponent.h \
     admin.h \
-    adminlogindialog.h
+    adminlogindialog.h \
+    geometry.h
 
 FORMS    += mainwindow.ui

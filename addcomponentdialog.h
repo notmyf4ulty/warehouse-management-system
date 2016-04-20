@@ -14,15 +14,23 @@
 #include <QLayout>
 #include "dbconnector.h"
 #include "basketcomponent.h"
+#include "geometry.h"
+#include <QKeyEvent>
 
 class AddComponentDialog : public QDialog
 {
     Q_OBJECT
-
+signals:
+    void dialogClosed();
+private slots:
+    void addButtonHandle();
+    void componentChoiceShowProperties();
 public:
     explicit AddComponentDialog(QWidget *parent = 0);
 
 private:
+    QWidget *parentWidget;
+
     QComboBox *componentChoice;
 
     QLabel *componentLabel;
@@ -70,9 +78,10 @@ private:
     QString addCapacitor();
     QString addTransistor();
 
-private slots:
-    void addButtonHandle();
-    void componentChoiceShowProperties();
+    void closeEvent(QCloseEvent *event) {parentWidget->show();
+                                         emit dialogClosed();
+                                         event->accept();}
+
 };
 
 #endif // ADDELEMENTSCREEN_H

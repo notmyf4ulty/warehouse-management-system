@@ -5,7 +5,6 @@
 MainWindow::MainWindow(QApplication *_app, QWidget *parent)
     : QMainWindow(parent)
 {
-    //this->setGeometry(0,0,500,500);
     app = _app;
 
     centralWidget = new QWidget(this);
@@ -74,10 +73,11 @@ MainWindow::MainWindow(QApplication *_app, QWidget *parent)
     statusBarLayout->addWidget(statusBar);
     bottomLayout->addWidget(openBasketButton);
 
-
     addToBasketButton->setEnabled(false);
     setMenuBar();
     configureDatabase();
+    this->setGeometry(0,0,1000,500);
+    alignCenter<QMainWindow>(this);
 }
 
 void MainWindow::importCSV()
@@ -131,7 +131,7 @@ void MainWindow::setMenuBar()
     adminToolsMenu->addAction(tr("&MySQL command line"), this, SLOT(toolsMySQLcmd()));
     adminToolsMenu->addAction(tr("&Add new components"), this, SLOT(addNewComponent()));
     adminToolsMenu->addAction(tr("Import CSV file..."), this, SLOT(importCSV()));
-    adminToolsMenu->setEnabled(false);
+//    adminToolsMenu->setEnabled(false);
     //  componentsMenu->addAction(tr("&Delete components"), this, SLOT());
 }
 
