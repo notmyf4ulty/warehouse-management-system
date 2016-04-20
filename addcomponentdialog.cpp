@@ -83,6 +83,7 @@ AddComponentDialog::AddComponentDialog(QWidget *parent) :
     model = &dbConnector::getInstance().getModel();
 
     this->adjustSize();
+    this->layout()->setSizeConstraint(QLayout::SetFixedSize);
 }
 
 void AddComponentDialog::hideAll()

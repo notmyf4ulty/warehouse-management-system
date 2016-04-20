@@ -6,6 +6,7 @@
 #include <QSqlQueryModel>
 #include "dbconnector.h"
 #include <QHBoxLayout>
+#include <QLayout>
 
 class MySQLcmdDialog : public QDialog
 {

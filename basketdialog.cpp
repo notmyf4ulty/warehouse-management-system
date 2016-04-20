@@ -37,6 +37,8 @@ BasketDialog::BasketDialog(QWidget *parent) :
 
     listView->setModel(model);
     topLeftLayout->addWidget(listView);
+
+    this->layout()->setSizeConstraint(QLayout::SetFixedSize);
 }
 
 BasketDialog::proceedOrderButtonHandle()

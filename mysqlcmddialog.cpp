@@ -9,6 +9,8 @@ MySQLcmdDialog::MySQLcmdDialog(QWidget *parent) :
     connect(prompt, SIGNAL(returnPressed()), SLOT(promptHandle()));
     layout = new QHBoxLayout(this);
     layout->addWidget(prompt);
+
+    setFixedSize(size());
 }
 
 void MySQLcmdDialog::promptHandle() {

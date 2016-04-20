@@ -25,11 +25,11 @@
 #include <QStatusBar>
 #include "dbconnector.h"
 #include "addcomponentdialog.h"
-#include "addtobasketdialog.h"
 #include "basketdialog.h"
 #include "basketcomponent.h"
 #include "basket.h"
 #include "mysqlcmddialog.h"
+#include "adminlogindialog.h"
 
 namespace Ui {
     class MainWindow;
@@ -52,6 +52,7 @@ private slots:
     void addToBasketButtonHandle();
     void openBasketButtonHandle();
     void showComponentsTable();
+    void adminLogin();
 
 private:
     QApplication *app;
@@ -70,8 +71,7 @@ private:
     QPushButton *addToBasketButton;
     QPushButton *openBasketButton;
     QMenu *fileMenu;
-    QMenu *componentsMenu;
-    QMenu *toolsMenu;
+    QMenu *adminToolsMenu;
     QStatusBar *statusBar;
     QLabel *statusBarDbInfoPermanentLabel;
     QLabel *statusBarDbInfoModifableLabel;

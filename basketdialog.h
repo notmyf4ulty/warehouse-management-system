@@ -12,6 +12,7 @@
 #include <QStringListModel>
 #include <QListView>
 #include <QDebug>
+#include <QLayout>
 
 class BasketDialog : public QDialog
 {

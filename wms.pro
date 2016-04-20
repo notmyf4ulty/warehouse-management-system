@@ -20,18 +20,20 @@ SOURCES += main.cpp\
     dbconnector.cpp \
     mysqlcmddialog.cpp \
     addcomponentdialog.cpp \
-    addtobasketdialog.cpp \
     basketdialog.cpp \
     basket.cpp \
-    basketcomponent.cpp
+    basketcomponent.cpp \
+    admin.cpp \
+    adminlogindialog.cpp
 
 HEADERS  += mainwindow.h \
     dbconnector.h \
     mysqlcmddialog.h \
     addcomponentdialog.h \
-    addtobasketdialog.h \
     basketdialog.h \
     basket.h \
-    basketcomponent.h
+    basketcomponent.h \
+    admin.h \
+    adminlogindialog.h
 
 FORMS    += mainwindow.ui

@@ -122,17 +122,17 @@ void MainWindow::importCSV()
 void MainWindow::setMenuBar()
 {
     fileMenu = this->menuBar()->addMenu(tr("&Database"));
-    fileMenu->addAction(tr("Import CSV file..."), this, SLOT(importCSV()));
-    fileMenu->addAction(tr("Configure Database"), this, SLOT(configureDatabase()));
+    fileMenu->addAction(tr("&Reset connection"), this, SLOT(configureDatabase()));
+    fileMenu->addAction(tr("&Admin mode"), this, SLOT(adminLogin()));
     fileMenu->addSeparator();
     fileMenu->addAction(tr("&Quit"), this, SLOT(quitApp()));
 
-    componentsMenu = this->menuBar()->addMenu(tr("&Components"));
-    componentsMenu->addAction(tr("&Add new components"), this, SLOT(addNewComponent()));
+    adminToolsMenu = this->menuBar()->addMenu(tr("&Admin Tools"));
+    adminToolsMenu->addAction(tr("&MySQL command line"), this, SLOT(toolsMySQLcmd()));
+    adminToolsMenu->addAction(tr("&Add new components"), this, SLOT(addNewComponent()));
+    adminToolsMenu->addAction(tr("Import CSV file..."), this, SLOT(importCSV()));
+    adminToolsMenu->setEnabled(false);
     //  componentsMenu->addAction(tr("&Delete components"), this, SLOT());
-
-    toolsMenu = this->menuBar()->addMenu(tr("&Tools"));
-    toolsMenu->addAction(tr("&MySQL command line"), this, SLOT(toolsMySQLcmd()));
 }
 
 QString MainWindow::getTableName()
@@ -237,4 +237,10 @@ void MainWindow::showComponentsTable()
         addToBasketButton->setEnabled(false);
         break;
     }
+}
+
+void MainWindow::adminLogin()
+{
+    AdminLoginDialog *dialog = new AdminLoginDialog(this);
+    dialog->show();
 }

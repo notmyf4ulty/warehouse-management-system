@@ -11,6 +11,7 @@
 #include <QSqlQueryModel>
 #include <QString>
 #include <QDebug>
+#include <QLayout>
 #include "dbconnector.h"
 #include "basketcomponent.h"
 
