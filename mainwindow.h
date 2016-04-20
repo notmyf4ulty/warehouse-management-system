@@ -22,6 +22,7 @@
 #include <QComboBox>
 #include <QModelIndex>
 #include <QVector>
+#include <QStatusBar>
 #include "dbconnector.h"
 #include "addcomponentdialog.h"
 #include "addtobasketdialog.h"
@@ -64,12 +65,6 @@ private:
     QLabel *setQuantityLabel;
     QLabel *setQuantityCommunicateLabel;
     QLineEdit *setQuantityInput;
-    QVBoxLayout *outerLayout;
-    QHBoxLayout *topLayout;
-    QVBoxLayout *tableLayout;
-    QHBoxLayout *bottomLayout;
-    QVBoxLayout *bottomLeftLayout;
-    QHBoxLayout *bottomLeftTopLayout;
     QString addElementsQuery;
     QComboBox *componentComboBox;
     QPushButton *addToBasketButton;
@@ -77,6 +72,16 @@ private:
     QMenu *fileMenu;
     QMenu *componentsMenu;
     QMenu *toolsMenu;
+    QStatusBar *statusBar;
+    QLabel *statusBarDbInfoPermanentLabel;
+    QLabel *statusBarDbInfoModifableLabel;
+    QVBoxLayout *outerLayout;
+    QHBoxLayout *topLayout;
+    QVBoxLayout *tableLayout;
+    QHBoxLayout *bottomLayout;
+    QVBoxLayout *bottomLeftLayout;
+    QHBoxLayout *bottomLeftTopLayout;
+    QHBoxLayout *statusBarLayout;
     void setMenuBar();
     QString getTableName();
     void eraseKeyFields();

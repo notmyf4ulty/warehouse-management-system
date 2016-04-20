@@ -24,12 +24,17 @@ MainWindow::MainWindow(QApplication *_app, QWidget *parent)
     addToBasketButton = new QPushButton("Add to basket");
     openBasketButton = new QPushButton("Open basket");
 
+    statusBar = new QStatusBar(this);
+    statusBarDbInfoPermanentLabel = new QLabel("Database: ");
+    statusBarDbInfoModifableLabel = new QLabel("");
+
     outerLayout = new QVBoxLayout();
     topLayout = new QHBoxLayout();
     tableLayout = new QVBoxLayout();
     bottomLayout = new QHBoxLayout();
     bottomLeftLayout = new QVBoxLayout();
     bottomLeftTopLayout = new QHBoxLayout();
+    statusBarLayout = new QHBoxLayout();
 
     componentComboBox->addItem(tr("<none>"));
     componentComboBox->addItem(tr("Resistors"));
@@ -47,10 +52,15 @@ MainWindow::MainWindow(QApplication *_app, QWidget *parent)
     connect(addToBasketButton, SIGNAL(clicked()), this, SLOT(addToBasketButtonHandle()));
     connect(openBasketButton, SIGNAL(clicked()), this, SLOT(openBasketButtonHandle()));
 
+    statusBar->setSizeGripEnabled(false);
+    statusBar->addPermanentWidget(statusBarDbInfoPermanentLabel);
+    statusBar->addPermanentWidget(statusBarDbInfoModifableLabel,1);
+
     centralWidget->setLayout(outerLayout);
     outerLayout->addLayout(topLayout);
     outerLayout->addLayout(tableLayout);
     outerLayout->addLayout(bottomLayout);
+    outerLayout->addLayout(statusBarLayout);
 
     topLayout->addWidget(componentLabel);
     topLayout->addWidget(componentComboBox);
@@ -61,10 +71,13 @@ MainWindow::MainWindow(QApplication *_app, QWidget *parent)
     bottomLeftTopLayout->addWidget(setQuantityInput);
     bottomLeftTopLayout->addWidget(setQuantityCommunicateLabel);
     bottomLeftLayout->addWidget(addToBasketButton);
+    statusBarLayout->addWidget(statusBar);
     bottomLayout->addWidget(openBasketButton);
+
 
     addToBasketButton->setEnabled(false);
     setMenuBar();
+    configureDatabase();
 }
 
 void MainWindow::importCSV()
@@ -148,7 +161,16 @@ void MainWindow::eraseKeyFields()
 
 void MainWindow::configureDatabase()
 {
-    dbConnector::getInstance().runDatabase();
+    if(dbConnector::getInstance().runDatabase())
+    {
+        statusBarDbInfoModifableLabel->setStyleSheet("QLabel { color : green; }");
+        statusBarDbInfoModifableLabel->setText("CONNECTED");
+    }
+    else
+    {
+        statusBarDbInfoModifableLabel->setStyleSheet("QLabel { color : red; }");
+        statusBarDbInfoModifableLabel->setText("NOT CONNECTED");
+    }
 }
 
 void MainWindow::quitApp()
