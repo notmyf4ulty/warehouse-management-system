@@ -31,6 +31,7 @@
 #include "mysqlcmddialog.h"
 #include "adminlogindialog.h"
 #include "geometry.h"
+#include <QIntValidator>
 
 namespace Ui {
     class MainWindow;
@@ -54,7 +55,8 @@ private slots:
     void openBasketButtonHandle();
     void showComponentsTable();
     void adminLogin();
-
+    void checkAdmin();
+    void onSQLCmdClose();
 private:
     QApplication *app;
     QWidget *centralWidget;
@@ -76,6 +78,8 @@ private:
     QStatusBar *statusBar;
     QLabel *statusBarDbInfoPermanentLabel;
     QLabel *statusBarDbInfoModifableLabel;
+    QLabel *statusBarAdminInfoPermanentLabel;
+    QLabel *statusBarAdminInfoModifableLabel;
     QVBoxLayout *outerLayout;
     QHBoxLayout *topLayout;
     QVBoxLayout *tableLayout;

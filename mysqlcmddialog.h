@@ -9,6 +9,8 @@
 #include <QLayout>
 #include "geometry.h"
 #include <QKeyEvent>
+#include <QRect>
+#include <QString>
 
 class MySQLcmdDialog : public QDialog
 {
@@ -23,11 +25,12 @@ public slots:
     void promptHandle();
 
 private:
+    QString oldQuery;
     QWidget *parentWidget;
     QLineEdit *prompt;
     QSqlQueryModel *model;
     QHBoxLayout *outerLayout;
-    void closeEvent(QCloseEvent *event) {parentWidget->show();
+    void closeEvent(QCloseEvent *event) {model->setQuery(oldQuery);
                                          emit dialogClosed();
                                          event->accept();}
 };

@@ -10,3 +10,8 @@ bool Admin::login(QString _password)
     }
     return result;
 }
+
+bool Admin::getPass()
+{
+    return pass;
+}

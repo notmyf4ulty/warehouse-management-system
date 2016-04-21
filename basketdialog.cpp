@@ -12,8 +12,6 @@ BasketDialog::BasketDialog(QWidget *parent) :
     topRightLayout = new QVBoxLayout();
     bottomLayout = new QHBoxLayout();
 
-
-
     outerLayout->addLayout(topLayout);
     outerLayout->addLayout(bottomLayout);
     topLayout->addLayout(topLeftLayout);
@@ -44,12 +42,13 @@ BasketDialog::BasketDialog(QWidget *parent) :
     this->resize(300,300);
     alignCenter<QDialog>(this);
     parentWidget->hide();
-    this->layout()->setSizeConstraint(QLayout::SetFixedSize);
 }
 
 void BasketDialog::proceedOrderButtonHandle()
 {
     Basket::getInstance().proceedOrder();
+    close();
+
 }
 
 

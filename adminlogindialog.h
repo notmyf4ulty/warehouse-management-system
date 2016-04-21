@@ -4,25 +4,27 @@
 #include <QObject>
 #include <QWidget>
 #include <QDialog>
-#include <QTextEdit>
+#include <QLineEdit>
 #include <QPushButton>
 #include <QHBoxLayout>
 #include "geometry.h"
 #include <QKeyEvent>
+#include "admin.h"
 
 class AdminLoginDialog : public QDialog
 {
     Q_OBJECT
 public:
     explicit AdminLoginDialog(QWidget *parent = 0);
-
-
 signals:
     void dialogClosed();
+    void adminPassed();
 private slots:
+    void passInputHandle();
 private:
+    bool isAdmin;
     QWidget *parentWidget;
-    QTextEdit *passInput;
+    QLineEdit *passInput;
     QPushButton *OKButton;
     QHBoxLayout *outerLayout;
     void closeEvent(QCloseEvent *event) {parentWidget->show();

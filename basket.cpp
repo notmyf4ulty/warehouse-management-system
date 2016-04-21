@@ -29,6 +29,7 @@ void Basket::addToBasket(const BasketComponent &component)
 void Basket::proceedOrder()
 {
     QString query = "";
+    QString oldQuery = queryModel->query().executedQuery();
     for(auto it = basketComponents.begin(); it != basketComponents.end(); ++it)
     {
         query = "UPDATE "
@@ -38,10 +39,12 @@ void Basket::proceedOrder()
                 + " WHERE code = "
                 + "\"" + (*it).getCode() + "\""
                 + ";";
+
         queryModel->setQuery(query);
+        queryModel->setQuery(oldQuery);
         query = "";
-        //basketComponents.erase(basketComponents.begin(), basketComponents.end());
     }
+    basketComponents.erase(basketComponents.begin(), basketComponents.end());
 }
 
 

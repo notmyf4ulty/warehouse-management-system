@@ -3,15 +3,22 @@
 AdminLoginDialog::AdminLoginDialog(QWidget *parent) :
     QDialog(parent), parentWidget(parent)
 {
-    passInput = new QTextEdit();
-    OKButton = new QPushButton("OK");
+    isAdmin = false;
+    passInput = new QLineEdit();
     outerLayout = new QHBoxLayout(this);
 
+    passInput->setEchoMode(QLineEdit::EchoMode::Password);
+    connect(passInput, SIGNAL(returnPressed()), SLOT(passInputHandle()));
     outerLayout->addWidget(passInput);
-    outerLayout->addWidget(OKButton);
 
+    this->resize(300,50);
     connect(this,SIGNAL(dialogClosed()),this,SLOT(close()));
     alignCenter<QDialog>(this);
     parentWidget->hide();
-    this->layout()->setSizeConstraint(QLayout::SetFixedSize);
+}
+
+void AdminLoginDialog::passInputHandle()
+{
+    Admin::getInstance().login(passInput->text());
+    close();
 }

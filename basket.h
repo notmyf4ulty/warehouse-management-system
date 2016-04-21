@@ -6,6 +6,7 @@
 #include <QStringListModel>
 #include <QtAlgorithms>
 #include <QSqlQueryModel>
+#include <QSqlQuery>
 #include "basketcomponent.h"
 
 #include <QDebug>

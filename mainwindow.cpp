@@ -26,6 +26,8 @@ MainWindow::MainWindow(QApplication *_app, QWidget *parent)
     statusBar = new QStatusBar(this);
     statusBarDbInfoPermanentLabel = new QLabel("Database: ");
     statusBarDbInfoModifableLabel = new QLabel("");
+    statusBarAdminInfoPermanentLabel = new QLabel("Admin: ");
+    statusBarAdminInfoModifableLabel = new QLabel("NO (File->Admin mode->type: \"1234\")");
 
     outerLayout = new QVBoxLayout();
     topLayout = new QHBoxLayout();
@@ -34,6 +36,8 @@ MainWindow::MainWindow(QApplication *_app, QWidget *parent)
     bottomLeftLayout = new QVBoxLayout();
     bottomLeftTopLayout = new QHBoxLayout();
     statusBarLayout = new QHBoxLayout();
+
+    setQuantityInput->setValidator( new QIntValidator(0, 1000, this));
 
     componentComboBox->addItem(tr("<none>"));
     componentComboBox->addItem(tr("Resistors"));
@@ -54,6 +58,9 @@ MainWindow::MainWindow(QApplication *_app, QWidget *parent)
     statusBar->setSizeGripEnabled(false);
     statusBar->addPermanentWidget(statusBarDbInfoPermanentLabel);
     statusBar->addPermanentWidget(statusBarDbInfoModifableLabel,1);
+    statusBar->addPermanentWidget(statusBarAdminInfoPermanentLabel);
+    statusBar->addPermanentWidget(statusBarAdminInfoModifableLabel,1);
+    statusBarAdminInfoModifableLabel->setStyleSheet("QLabel { color : red; }");
 
     centralWidget->setLayout(outerLayout);
     outerLayout->addLayout(topLayout);
@@ -131,8 +138,7 @@ void MainWindow::setMenuBar()
     adminToolsMenu->addAction(tr("&MySQL command line"), this, SLOT(toolsMySQLcmd()));
     adminToolsMenu->addAction(tr("&Add new components"), this, SLOT(addNewComponent()));
     adminToolsMenu->addAction(tr("Import CSV file..."), this, SLOT(importCSV()));
-//    adminToolsMenu->setEnabled(false);
-    //  componentsMenu->addAction(tr("&Delete components"), this, SLOT());
+    adminToolsMenu->setEnabled(false);
 }
 
 QString MainWindow::getTableName()
@@ -182,7 +188,6 @@ void MainWindow::onTableClicked(const QModelIndex &index)
 {
     if (index.isValid()) {
         currentTableIndex = &index;
-        qDebug() << model->index(index.row(),1).data().toString() << endl;
     }
 }
 
@@ -195,6 +200,14 @@ void MainWindow::addNewComponent()
 void MainWindow::toolsMySQLcmd()
 {
     MySQLcmdDialog *dialog = new MySQLcmdDialog(this);
+    dialog->setAttribute(Qt::WA_DeleteOnClose);
+    connect(dialog, SIGNAL(destroyed(QObject*)),SLOT(onSQLCmdClose()));
+    adminToolsMenu->setEnabled(false);
+    fileMenu->setEnabled(false);
+    componentComboBox->setEnabled(false);
+    addToBasketButton->setEnabled(false);
+    openBasketButton->setEnabled(false);
+    setQuantityInput->setEnabled(false);
     dialog->show();
 }
 
@@ -206,6 +219,8 @@ void MainWindow::addToBasketButtonHandle()
                 setQuantityInput->text().toInt()
                 );
     Basket::getInstance().addToBasket(component);
+    currentTableIndex = 0;
+    setQuantityInput->setText("");
 }
 
 void MainWindow::openBasketButtonHandle()
@@ -242,5 +257,27 @@ void MainWindow::showComponentsTable()
 void MainWindow::adminLogin()
 {
     AdminLoginDialog *dialog = new AdminLoginDialog(this);
+    dialog->setAttribute(Qt::WA_DeleteOnClose);
+    connect(dialog, SIGNAL(destroyed(QObject*)),SLOT(checkAdmin()));
     dialog->show();
+}
+
+void MainWindow::checkAdmin()
+{
+        if(Admin::getInstance().getPass())
+        {
+            adminToolsMenu->setEnabled(true);
+            statusBarAdminInfoModifableLabel->setStyleSheet("QLabel { color : green; }");
+            statusBarAdminInfoModifableLabel->setText("YES");
+        }
+}
+
+void MainWindow::onSQLCmdClose()
+{
+    adminToolsMenu->setEnabled(true);
+    fileMenu->setEnabled(true);
+    componentComboBox->setEnabled(true);
+    addToBasketButton->setEnabled(true);
+    openBasketButton->setEnabled(true);
+    setQuantityInput->setEnabled(true);
 }

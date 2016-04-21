@@ -86,7 +86,6 @@ AddComponentDialog::AddComponentDialog(QWidget *parent) :
     this->adjustSize();
     alignCenter<QDialog>(this);
     parentWidget->hide();
-//    this->layout()->setSizeConstraint(QLayout::SetFixedSize);
     this->layout()->setSizeConstraint(QLayout::SetFixedSize);
 }
 
@@ -228,6 +227,7 @@ QString AddComponentDialog::addTransistor()
 void AddComponentDialog::addButtonHandle()
 {
     QString query = "";
+    QString oldQuery = model->query().executedQuery();
     switch(componentChoice->currentIndex()) {
     case 1:
         query = addResistor();
@@ -243,6 +243,7 @@ void AddComponentDialog::addButtonHandle()
     }
     qDebug() << query << endl;
     model->setQuery(query);
+    model->setQuery(oldQuery);
 }
 
 void AddComponentDialog::componentChoiceShowProperties()
