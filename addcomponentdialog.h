@@ -17,44 +17,57 @@
 #include "geometry.h"
 #include <QKeyEvent>
 
+
+//!  Klasa tworząca okno dodawania nowych komponentów.
+/*!
+  W oknie dialogowym możliwe jest dodanie trzech rodzajwW komponentów elektronicznych:
+  - Rezystora
+  - Kondensatora
+  - Tranzystora
+  <p> Każdy z komponentów posiada odpowiednie dla siebie parametry w zależności od wybranej opcji.
+*/
 class AddComponentDialog : public QDialog
 {
     Q_OBJECT
 signals:
+    //! Sygnał emitowany przy zamknięciu okna. Uruchamia z powrotem okno główne.
     void dialogClosed();
 private slots:
     void addButtonHandle();
     void componentChoiceShowProperties();
 public:
+    //! Konstruktor tworzący okno dialogowe.
+    /*!
+      \param parent Rodzic dla tworzonego okna.
+    */
     explicit AddComponentDialog(QWidget *parent = 0);
 
 private:
     QWidget *parentWidget;
-
     QComboBox *componentChoice;
 
     QLabel *componentLabel;
     QLabel *codeLabel;
     QLabel *valueLabel;
-    QLabel *typeLabel; // HERE
+    QLabel *typeLabel;
     QLabel *packageLabel;
     QLabel *packageCaseLabel;
     QLabel *toleranceLabel;
     QLabel *powerLabel;
-    QLabel *voltageLabel; // HERE
-    QLabel *moreInfoLabel; // HERE
+    QLabel *voltageLabel;
+    QLabel *moreInfoLabel;
     QLabel *quantityLabel;
 
     QLineEdit *componentInput;
     QLineEdit *codeInput;
     QLineEdit *valueInput;
-    QLineEdit *typeInput; // HERE
+    QLineEdit *typeInput;
     QLineEdit *packageInput;
     QLineEdit *packageCaseInput;
     QLineEdit *toleranceInput;
     QLineEdit *powerInput;
-    QLineEdit *voltageInput; // HERE
-    QLineEdit *moreInfoInput; // HERE
+    QLineEdit *voltageInput;
+    QLineEdit *moreInfoInput;
     QLineEdit *quantityInput;
 
     QPushButton *addButton;
@@ -64,8 +77,6 @@ private:
     QVBoxLayout *inputLayout;
     QVBoxLayout *labelLayout;
     QHBoxLayout *buttonsLayout;
-//    QGridLayout *gridLayout;
-//    Component *component;
     QSqlQueryModel *model;
 
     void hideAll();

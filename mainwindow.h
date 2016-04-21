@@ -37,11 +37,33 @@ namespace Ui {
     class MainWindow;
 }
 
+//!  Klasa tworząca okno główne aplikacji.
+/*!
+  Okno posiada określone komponenty:
+  1. Menu z dwoma podsekcjami:<br>
+  1.1. File - możliwe jest zresetowanie połączenia z bazą danych, włączenie okna logowania do trybu admina
+  oraz wyjście z aplikacji.<br>
+  1.2. Admin tools - możliwe jest dodanie nowych komponentów, wczytanie pliku CSV oraz wywołanie prostej linii poleceń
+  zapytań MySQL.<br>
+  2. Ekran główny z rozwijanym menu, za pomocą którego można wybrać odpowiednią tabelę z komponentami. <br>
+  3. Panel dodawania komponentów do koszyka. <br>
+  4. Pasek statusowy - informuje o połączeniu z bazą danych oraz o włączeniu trybu admina. <br>
+  <br>
+  Po wybraniu tabeli z komponentami, naciśnięciu któregoś z nich oraz wpisaniu odpowiedniej liczny (z zakresu dostępnęj ilości komponentów)
+ możliwe jest użycie przycisku "Add to basket", który doda daną ilość komponentów do koszyka.<br>
+ Otworzenie koszyka możliwe jest po naciśnięciu przycisku "Open Basket".<br>
+ Tryb admina możliwy jest do odblokowania po wykonaniu instrukcji z paska statusowego.
+*/
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
+    //! Konstruktor tworzący okno główne.
+    /*!
+      \param _app obiekt aplikacji uruchamiającej okno główne.
+      \param parent Rodzic dla tworzonego okna.
+    */
     explicit MainWindow(QApplication *_app, QWidget *parent = 0);
 
 private slots:
@@ -57,6 +79,7 @@ private slots:
     void adminLogin();
     void checkAdmin();
     void onSQLCmdClose();
+
 private:
     QApplication *app;
     QWidget *centralWidget;
@@ -64,7 +87,6 @@ private:
     QSqlQueryModel *model;
     const QModelIndex *currentTableIndex;
     Basket *basket;
-//    QVector<Component> *basketComponents;
     QLabel *componentLabel;
     QLabel *setQuantityLabel;
     QLabel *setQuantityCommunicateLabel;
@@ -87,10 +109,10 @@ private:
     QVBoxLayout *bottomLeftLayout;
     QHBoxLayout *bottomLeftTopLayout;
     QHBoxLayout *statusBarLayout;
+
     void setMenuBar();
     QString getTableName();
     void eraseKeyFields();
-
 };
 
 #endif // MAINWINDOW_H

@@ -6,6 +6,11 @@
 #include <QDesktopWidget>
 #include <QDebug>
 
+//!  Szablon centrujący okna.
+/*!
+  Funkcja przyjmuje obiekt posiadający funkcje zwracające szerokość i wysokość,
+  a następnie po wykonaniu prostych obliczeń centruje go na ekranie.
+*/
 template<typename T> void alignCenter(T *widget)
 {
     QRect screenGeometry = QApplication::desktop()->screenGeometry();

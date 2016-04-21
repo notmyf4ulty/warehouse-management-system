@@ -23,13 +23,13 @@ BasketDialog::BasketDialog(QWidget *parent) :
     QVector<BasketComponent> basketComponents = Basket::getInstance().getBasketComponents();
     QStringList list;
     for (auto it = basketComponents.begin(); it != basketComponents.end(); ++it) {
-        qDebug() << (*it).toString();
+//        qDebug() << (*it).toString();
         list << (*it).toString();
     }
     QStringListModel *model = new QStringListModel();
     model->setStringList(list);
-    for (auto it = list.begin(); it != list.end(); ++it)
-        qDebug() << (*it);
+//    for (auto it = list.begin(); it != list.end(); ++it)
+//        qDebug() << (*it);
     QListView *listView = new QListView();
 
     connect(proceedOrderButton, SIGNAL(clicked(bool)), this, SLOT(proceedOrderButtonHandle()));

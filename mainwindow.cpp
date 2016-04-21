@@ -189,6 +189,17 @@ void MainWindow::onTableClicked(const QModelIndex &index)
     if (index.isValid()) {
         currentTableIndex = &index;
     }
+    setQuantityInput->setText("");
+    if (componentComboBox->currentIndex() < 2)
+    {
+        int a = model->index(currentTableIndex->row(),6).data().toInt();
+        setQuantityInput->setValidator( new QIntValidator(0, a, this));
+    }
+    else
+    {
+        int a = model->index(currentTableIndex->row(),4).data().toInt();
+        setQuantityInput->setValidator( new QIntValidator(0, a, this));
+    }
 }
 
 void MainWindow::addNewComponent()

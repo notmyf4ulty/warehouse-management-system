@@ -17,13 +17,22 @@
 #include <QWidget>
 #include <QKeyEvent>
 
+//!  Klasa tworząca okno "dodawania nowych komponentów.."koszyka zakupów"
+/*!
+  Wypisane są tu komponenty, które aktualnie znajdują się w koszyku.
+*/
 class BasketDialog : public QDialog
 {
     Q_OBJECT
 public:
+    //! Konstruktor tworzący okno dialogowe.
+    /*!
+      \param parent Rodzic dla tworzonego okna.
+    */
     explicit BasketDialog(QWidget *parent = 0);
 
 signals:
+    //! Sygnał emitowany przy zamknięciu okna. Uruchamia z powrotem okno główne.
     void dialogClosed();
 private slots:
     void proceedOrderButtonHandle();
