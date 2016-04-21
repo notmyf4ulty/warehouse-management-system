@@ -190,7 +190,7 @@ void MainWindow::onTableClicked(const QModelIndex &index)
         currentTableIndex = &index;
     }
     setQuantityInput->setText("");
-    if (componentComboBox->currentIndex() < 2)
+    if (componentComboBox->currentIndex() < 3)
     {
         int a = model->index(currentTableIndex->row(),6).data().toInt();
         setQuantityInput->setValidator( new QIntValidator(0, a, this));
