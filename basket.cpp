@@ -47,4 +47,9 @@ void Basket::proceedOrder()
     basketComponents.erase(basketComponents.begin(), basketComponents.end());
 }
 
+void Basket::clearBasket()
+{
+    basketComponents.erase(basketComponents.begin(), basketComponents.end());
+}
+
 

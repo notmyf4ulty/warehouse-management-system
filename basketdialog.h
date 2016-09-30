@@ -36,15 +36,22 @@ signals:
     void dialogClosed();
 private slots:
     void proceedOrderButtonHandle();
+    void clearOrderButtonHanle();
 private:
     QWidget *parentWidget;
     QPushButton *proceedOrderButton;
+    QPushButton *clearOrderButton;
     QPushButton *cancelButton;
     QVBoxLayout *outerLayout;
     QHBoxLayout *topLayout;
     QVBoxLayout *topLeftLayout;
     QVBoxLayout *topRightLayout;
     QHBoxLayout *bottomLayout;
+
+    QStringList *basketComponentsList;
+    QStringListModel *basketComponentsModel;
+    QListView *basketComponentsView;
+
     void closeEvent(QCloseEvent *event) {parentWidget->show();
                                          emit dialogClosed();
                                          event->accept();}

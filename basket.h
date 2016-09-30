@@ -36,6 +36,8 @@ public:
     //! Funkcja kończąca zamówienie. Do modelu bazy danych wysyłane jest zapytanie zmieniające ilosć określonych w koszyku komponentów.
     void proceedOrder();
 
+    void clearBasket();
+
     //! Funkcja zwracająca referencję do koszyka (wektora) z komponentami.
     QVector<BasketComponent> &getBasketComponents() {return basketComponents;}
 
